@@ -32,7 +32,7 @@ export default function Results({ user, navigate, resultFilter, setResultFilter,
           <h1 className="results-title">Your Eligibility Results</h1>
           <p className="results-subtitle">Based on your profile — {profile.fullName || user?.name || ''}</p>
         </div>
-        <button className="btn btn-ghost btn-sm" onClick={() => navigate('checker')}>✏️ Update Profile</button>
+        <button className="btn btn-ghost btn-sm" onClick={() => navigate('checker')}> Update Profile</button>
       </div>
 
       <div className="g3 results-stats">
@@ -93,7 +93,7 @@ export default function Results({ user, navigate, resultFilter, setResultFilter,
                 <div className="result-details">
                   <div className="g2 result-details-grid">
                     <div>
-                      <div className="result-detail-heading-met">✅ Criteria Met ({result.matched.length})</div>
+                      <div className="result-detail-heading-met">Criteria Met ({result.matched.length})</div>
                       {result.matched.length > 0
                         ? result.matched.map(m => <div key={m} className="result-detail-item">✓ {m}</div>)
                         : <div style={{ fontSize: '13px', color: 'var(--text3)' }}>No restrictions</div>
@@ -108,7 +108,7 @@ export default function Results({ user, navigate, resultFilter, setResultFilter,
                       )}
                       {result.missingDocs.length > 0 && (
                         <>
-                          <div className="result-detail-heading-docs">📄 Missing Documents</div>
+                          <div className="result-detail-heading-docs">Missing Documents</div>
                           {result.missingDocs.map(d => <div key={d} className="result-detail-item">⚠ {d}</div>)}
                         </>
                       )}
