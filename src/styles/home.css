@@ -251,9 +251,90 @@
   margin-bottom: 28px;
 }
 
+/* ── Interactive hover button (21st.dev style) ── */
 .cta-btn {
+  position: relative;
   background: #fff;
   color: #1e3a5f;
+  overflow: hidden;
+  /* widen the button to give the sliding content room */
+  min-width: 220px;
+  padding-left: 28px;
+  padding-right: 28px;
+  cursor: pointer;
+  /* ensure children stack properly */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Default label — slides to the right and fades out on hover */
+.cta-btn-label {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.35s ease;
+}
+
+.cta-btn:hover .cta-btn-label {
+  transform: translateX(48px);
+  opacity: 0;
+}
+
+/* Hover overlay — starts off-screen left, slides in centred on hover */
+.cta-btn-hover {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #fff;           /* shown on top of the expanding dark dot */
+  transform: translateX(-48px);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.cta-btn:hover .cta-btn-hover {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.cta-btn-arrow {
+  font-size: 1.1em;
+  transition: transform 0.2s ease 0.25s;
+}
+
+.cta-btn:hover .cta-btn-arrow {
+  transform: translateX(3px);
+}
+
+/* Expanding dot — circle in the centre that scales to fill the button */
+.cta-btn-dot {
+  position: absolute;
+  z-index: 1;
+  /* start as a small circle roughly in the lower-centre */
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #1e3a5f;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              border-radius 0.45s ease;
+  pointer-events: none;
+}
+
+.cta-btn:hover .cta-btn-dot {
+  /* scale up enough to cover any reasonable button width */
+  transform: translate(-50%, -50%) scale(22);
+  border-radius: 4px;
 }
 
 /* Footer */
