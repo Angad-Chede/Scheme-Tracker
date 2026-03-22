@@ -1,0 +1,21 @@
+/* =============================================
+   TOAST NOTIFICATION STYLES
+   ============================================= */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 9999;
+  box-shadow: var(--shadow-md);
+  color: #fff;
+  animation: toast-slideup 0.3s ease;
+}
+
+@keyframes toast-slideup {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}

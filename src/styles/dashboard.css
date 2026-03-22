@@ -1,0 +1,216 @@
+/* =============================================
+   USER DASHBOARD STYLES
+   ============================================= */
+.dashboard-layout {
+  display: flex;
+  min-height: calc(100vh - 64px);
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 28px 32px;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+.dashboard-greeting {
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.dashboard-meta {
+  color: var(--text2);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+/* Sidebar avatar */
+.sidebar-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--blue-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.sidebar-user-name {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.sidebar-user-email {
+  font-size: 12px;
+  color: var(--text3);
+}
+
+.sidebar-user-location {
+  font-size: 12px;
+  color: var(--text2);
+  margin-top: 4px;
+}
+
+.sidebar-header {
+  padding: 8px 14px 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+
+/* Profile completion banner */
+.profile-completion-card {
+  margin-bottom: 20px;
+  background: var(--blue-pale);
+  border-color: #bfdbfe;
+}
+
+.profile-completion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-completion-label {
+  font-weight: 700;
+}
+
+.profile-completion-bar {
+  margin-bottom: 12px;
+}
+
+/* Stats row */
+.dashboard-stats {
+  margin-bottom: 24px;
+}
+
+/* Eligible schemes list */
+.dashboard-eligible-card {
+  margin-bottom: 20px;
+}
+
+.dashboard-eligible-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.dashboard-eligible-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.eligible-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: var(--green-pale);
+  border-radius: 10px;
+}
+
+.eligible-item-name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.eligible-item-benefit {
+  font-size: 12px;
+  color: var(--text2);
+}
+
+.eligible-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Bookmarks list */
+.bookmarks-card {
+  margin-bottom: 20px;
+}
+
+.bookmarks-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.bookmark-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: var(--gray-pale);
+  border-radius: 10px;
+}
+
+.bookmark-item-name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.bookmark-item-meta {
+  font-size: 12px;
+  color: var(--text2);
+}
+
+.bookmark-item-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.bookmarks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* AI Assistant card */
+.ai-card {
+  background: linear-gradient(135deg, #1e3a5f, #1d4ed8);
+  color: #fff;
+}
+
+.ai-card-inner {
+  display: flex;
+  gap: 12px;
+}
+
+.ai-icon {
+  font-size: 28px;
+}
+
+.ai-title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.ai-text {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+}
+
+.ai-btn {
+  margin-top: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Empty prompt */
+.dashboard-empty-prompt {
+  background: var(--white);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  padding: 40px;
+}

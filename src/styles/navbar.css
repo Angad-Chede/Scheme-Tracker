@@ -1,0 +1,74 @@
+/* =============================================
+   NAVBAR STYLES
+   ============================================= */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  gap: 12px;
+}
+
+.nav-brand {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--blue-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all 0.15s;
+  border: none;
+  background: none;
+}
+
+.nav-link:hover {
+  background: var(--gray-pale);
+  color: var(--text);
+}
+
+.nav-link.active {
+  background: var(--blue-pale);
+  color: var(--blue);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.nav-user-greeting {
+  font-size: 13px;
+  color: var(--text2);
+  font-weight: 500;
+}
+
+@media (max-width: 700px) {
+  .nav-links { display: none; }
+}

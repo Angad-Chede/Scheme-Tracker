@@ -1,0 +1,180 @@
+/* =============================================
+   ELIGIBILITY CHECKER STYLES
+   ============================================= */
+.checker-wrapper {
+  min-height: calc(100vh - 64px);
+  background: var(--bg);
+  padding: 32px 24px;
+}
+
+.checker-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.checker-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.checker-title {
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.checker-subtitle {
+  color: var(--text2);
+}
+
+/* Step progress indicator */
+.step-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+  gap: 0;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.step-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-label {
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: var(--border);
+  min-width: 24px;
+  margin-bottom: 18px;
+}
+
+/* Step content areas */
+.step-section-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.step-section-subtitle {
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 20px;
+}
+
+/* Status toggle cards */
+.status-card {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  background: var(--white);
+  transition: all 0.15s;
+}
+
+.status-card.active {
+  border-color: var(--green);
+  background: var(--green-pale);
+}
+
+.status-card-emoji {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.status-card-label {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.status-card-desc {
+  font-size: 12px;
+  color: var(--text2);
+}
+
+/* Document toggle cards */
+.doc-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  background: var(--white);
+  transition: all 0.15s;
+}
+
+.doc-card.active {
+  border-color: var(--green);
+  background: var(--green-pale);
+}
+
+.doc-checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 11px;
+  color: #fff;
+  background: var(--gray-pale);
+}
+
+.doc-checkbox.checked {
+  background: var(--green);
+}
+
+.doc-label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Profile summary box */
+.profile-summary {
+  background: var(--blue-pale);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.profile-summary-heading {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+
+.profile-summary-text {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+
+/* Navigation buttons row */
+.checker-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 4px;
+}

@@ -1,0 +1,232 @@
+/* =============================================
+   HOME PAGE STYLES
+   ============================================= */
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #1e3a5f 0%, #1d4ed8 55%, #059669 100%);
+  padding: 70px 40px;
+  color: #fff;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-content {
+  max-width: 620px;
+}
+
+.hero-badge {
+  margin-bottom: 20px;
+  padding: 7px 14px;
+  font-size: 13px;
+}
+
+.hero-title {
+  font-size: clamp(36px, 5vw, 54px);
+  font-weight: 800;
+  margin: 12px 0 20px;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.hero-subtitle {
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 36px;
+  line-height: 1.75;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.hero-btn-primary {
+  background: #fff;
+  color: #1e3a5f;
+}
+
+.hero-btn-outline {
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: #fff;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+
+.hero-stat-number {
+  font-size: 26px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.hero-stat-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Page container */
+.home-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 24px 0;
+}
+
+/* Section headings */
+.section-title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--blue-dark);
+  margin-bottom: 8px;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text2);
+  margin-bottom: 32px;
+}
+
+/* Category Grid */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 64px;
+}
+
+.cat-card {
+  border-radius: 14px;
+  padding: 20px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.cat-card:hover {
+  transform: translateY(-3px);
+}
+
+.cat-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.cat-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--blue-dark);
+}
+
+/* How it works */
+.how-grid {
+  margin-bottom: 64px;
+}
+
+.how-card {
+  text-align: center;
+}
+
+.how-number {
+  width: 48px;
+  height: 48px;
+  background: var(--blue-pale);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--blue);
+}
+
+.how-title {
+  margin-bottom: 8px;
+}
+
+.how-desc {
+  font-size: 14px;
+  color: var(--text2);
+}
+
+/* Testimonials */
+.testimonial-grid {
+  margin-bottom: 64px;
+}
+
+.testimonial-stars {
+  color: #f59e0b;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.testimonial-text {
+  font-size: 14px;
+  color: var(--text2);
+  margin-bottom: 16px;
+  line-height: 1.65;
+}
+
+.testimonial-name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.testimonial-role {
+  font-size: 12px;
+  color: var(--text3);
+}
+
+/* CTA Banner */
+.cta-banner {
+  background: linear-gradient(135deg, #1e3a5f, #1d4ed8);
+  border-radius: 20px;
+  padding: 48px 40px;
+  text-align: center;
+  margin-bottom: 64px;
+  color: #fff;
+}
+
+.cta-title {
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.cta-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 28px;
+}
+
+.cta-btn {
+  background: #fff;
+  color: #1e3a5f;
+}
+
+/* Footer */
+.home-footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 0;
+  text-align: center;
+  color: var(--text3);
+  font-size: 13px;
+}
+
+.home-footer-brand {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--blue-dark);
+  margin-bottom: 8px;
+}
