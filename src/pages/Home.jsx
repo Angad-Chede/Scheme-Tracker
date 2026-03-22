@@ -87,7 +87,14 @@ export default function Home({ navigate, setFilter }) {
         <div className="cta-banner">
           <h2 className="cta-title">Start Checking Your Eligibility Now</h2>
           <p className="cta-subtitle">It's free, private, and takes less than 3 minutes</p>
-          <button className="btn btn-lg cta-btn" onClick={() => navigate('checker')}>Get Started Free →</button>
+          <button className="btn btn-lg cta-btn" onClick={() => navigate('checker')}>
+            <span className="cta-btn-label">Get Started Free</span>
+            <span className="cta-btn-hover">
+              <span>Get Started Free</span>
+              <span className="cta-btn-arrow">→</span>
+            </span>
+            <span className="cta-btn-dot"></span>
+          </button>
         </div>
 
         {/* Footer */}
