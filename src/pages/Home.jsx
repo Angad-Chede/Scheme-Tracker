@@ -1,4 +1,5 @@
 import '../styles/home.css';
+import CountUp from '../components/CountUp';
 import { CATS, CAT_EMOJI, CAT_COLORS } from '../data';
 
 export default function Home({ navigate, setFilter }) {
@@ -19,13 +20,49 @@ export default function Home({ navigate, setFilter }) {
               <button className="btn btn-lg hero-btn-outline" onClick={() => navigate('schemes')}>Explore All Schemes</button>
             </div>
             <div className="hero-stats">
-              {[['30+', 'Govt. Schemes'], ['₹10L+', 'Avg. Benefits/Year'], ['95%', 'Accuracy Rate']].map(([n, l]) => (
-                <div key={l}>
-                  <div className="hero-stat-number">{n}</div>
-                  <div className="hero-stat-label">{l}</div>
+              <div>
+                <div className="hero-stat-number">
+                  <CountUp
+                    from={0}
+                    to={30}
+                    separator=","
+                    direction="up"
+                    duration={2}
+                  />
+                  +
                 </div>
-              ))}
-            </div>
+                <div className="hero-stat-label">Govt. Schemes</div>
+              </div>
+
+              <div>
+                <div className="hero-stat-number">
+                  ₹
+                  <CountUp
+                    from={0}
+                    to={10}
+                    separator=","
+                    direction="up"
+                    duration={2.2}
+                  />
+                  L+
+                </div>
+                <div className="hero-stat-label">Avg. Benefits/Year</div>
+              </div>
+
+              <div>
+                <div className="hero-stat-number">
+                  <CountUp
+                    from={0}
+                    to={95}
+                    separator=","
+                    direction="up"
+                    duration={2}
+                  />
+                  %
+                </div>
+                <div className="hero-stat-label">Accuracy Rate</div>
+              </div>
+            </div>            
           </div>
         </div>
       </div>
