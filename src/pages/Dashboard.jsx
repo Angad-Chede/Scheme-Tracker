@@ -38,10 +38,10 @@ export default function Dashboard({ user, navigate, onRemoveBookmark }) {
           {profile?.state && <div className="sidebar-user-location">📍 {profile.state}</div>}
         </div>
         {[
-          ['🏠 Overview', () => {}],
-          ['✅ My Results', () => navigate('results')],
-          ['📋 Explore Schemes', () => navigate('schemes')],
-          ['🔍 Check Eligibility', () => navigate('checker')],
+          ['Overview', () => {}],
+          ['My Results', () => navigate('results')],
+          ['Explore Schemes', () => navigate('schemes')],
+          ['Check Eligibility', () => navigate('checker')],
         ].map(([label, fn]) => (
           <div key={label} className="si" onClick={fn}>{label}</div>
         ))}
@@ -110,7 +110,7 @@ export default function Dashboard({ user, navigate, onRemoveBookmark }) {
         {/* Bookmarks */}
         {bookmarked.length > 0 && (
           <div className="card bookmarks-card">
-            <h3 className="bookmarks-title">🔖 Saved Schemes</h3>
+            <h3 className="bookmarks-title"> Saved Schemes</h3>
             <div className="bookmarks-list">
               {bookmarked.map(s => (
                 <div key={s.id} className="bookmark-item">
