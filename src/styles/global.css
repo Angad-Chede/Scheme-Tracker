@@ -2,7 +2,7 @@
    GLOBAL RESET & BASE
    ============================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -33,19 +33,32 @@
   --radius-sm: 8px;
   --shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+  /* ── Typography tokens ── */
+  --font-display:  'Bona Nova SC', serif;   /* grand display headings */
+  --font-heading:  'Bona Nova SC', serif;  /* section headings        */
+  --font-body:     'Bona Nova SC', serif;  /* body & UI copy          */
 }
 
 body {
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-  font-family: 'Bona Nova SC', serif;
+  font-family: var(--font-body);
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
   min-height: 100vh;
 }
 
-h1, h2, h3, h4 {
-  font-family: 'Lobster Two', cursive;
+/* Bodoni Moda — grand display titles (hero, CTA) */
+h1 {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+/* Lobster Two — warm section / card headings */
+h2, h3, h4 {
+  font-family: var(--font-heading);
   font-weight: 700;
   line-height: 1.25;
 }
