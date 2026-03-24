@@ -76,8 +76,9 @@
     2px 100%,
     100% 2px,
     2px 100%;
-  background-color: rgba(233, 71, 245, 0.05);
+  background-color: rgba(233, 71, 245, 0.1);
   color: var(--pink);
+  text-shadow: 0 0 10px rgba(233, 71, 245, 0.4);
 }
 
 .nav-link.active {
@@ -160,8 +161,11 @@
 }
 
 .nav-brand-blue {
-  color: var(--blue);
-  text-shadow: 0 0 10px rgba(47, 75, 162, 0.4);
+  background: linear-gradient(135deg, var(--blue), var(--pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 8px rgba(233, 71, 245, 0.3));
 }
 
 @media (max-width: 700px) {
