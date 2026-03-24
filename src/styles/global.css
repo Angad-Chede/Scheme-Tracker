@@ -3,6 +3,7 @@
    ============================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -15,6 +16,7 @@
   --pink: #E947F5;
   --blue-dark: #1e3a5f;
   --blue-pale: rgba(47, 75, 162, 0.15);
+  --pink-pale: rgba(233, 71, 245, 0.15);
   --green: #10b981;
   --green-pale: rgba(16, 185, 129, 0.1);
   --amber: #f59e0b;
@@ -28,18 +30,18 @@
   --bg: #030712;
   --card-bg: rgba(17, 24, 39, 0.7);
   --white: #111827;
-  --text: #f9fafb;
-  --text2: #9ca3af;
-  --text3: #6b7280;
+  --text: #FFFFFF;
+  --text2: #CBD5E1;
+  --text3: #94A3B8;
   --radius: 14px;
   --radius-sm: 8px;
   --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.6);
 
   /* ── Typography tokens ── */
-  --font-display:  'Inter', sans-serif;
-  --font-heading:  'Inter', sans-serif;
-  --font-body:     'Inter', sans-serif;
+  --font-display:  'Raleway', sans-serif;
+  --font-heading:  'Bona Nova SC', serif;
+  --font-body:     'Raleway', sans-serif;
 }
 
 body {
@@ -101,24 +103,29 @@ a {
 }
 
 .btn-primary {
-  background: var(--blue);
+  background: linear-gradient(135deg, var(--pink), var(--blue));
   color: #fff;
+  box-shadow: 0 4px 15px rgba(233, 71, 245, 0.3);
+  border: none;
 }
 
 .btn-primary:hover {
-  background: #3a5bc0;
-  transform: translateY(-1px);
-  box-shadow: 0 0 15px rgba(47, 75, 162, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(233, 71, 245, 0.5);
+  filter: brightness(1.1);
 }
 
 .btn-ghost {
-  background: transparent;
-  color: var(--text2);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
   border: 1px solid var(--border);
+  backdrop-filter: blur(4px);
 }
 
 .btn-ghost:hover {
-  background: var(--gray-pale);
+  background: rgba(233, 71, 245, 0.08);
+  border-color: var(--pink);
+  color: #fff;
 }
 
 .btn-sm {
@@ -153,11 +160,11 @@ a {
   font-weight: 600;
 }
 
-.b-blue  { background: var(--blue-pale);  color: var(--blue); }
-.b-green { background: var(--green-pale); color: #065f46; }
-.b-amber { background: var(--amber-pale); color: #92400e; }
-.b-red   { background: var(--red-pale);   color: #991b1b; }
-.b-gray  { background: var(--gray-pale);  color: var(--gray); }
+.b-blue  { background: var(--blue-pale);  color: #fff; border: 1px solid var(--blue); }
+.b-green { background: var(--green-pale); color: #fff; border: 1px solid var(--green); }
+.b-amber { background: var(--amber-pale); color: #fff; border: 1px solid var(--amber); }
+.b-red   { background: var(--red-pale);   color: #fff; border: 1px solid var(--red); }
+.b-gray  { background: var(--gray-pale);  color: var(--text2); border: 1px solid var(--border); }
 
 /* Form inputs */
 .inp {
@@ -196,12 +203,13 @@ a {
 
 /* Stat cards */
 .stat {
-  background: var(--white);
+  background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 20px;
   text-align: center;
   box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
 }
 
 .stat-n {
@@ -250,16 +258,18 @@ a {
   font-size: 13px;
   border: 1.5px solid var(--border);
   cursor: pointer;
-  transition: all 0.15s;
-  background: var(--white);
+  transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text2);
   font-family: inherit;
 }
 
 .chip:hover,
 .chip.on {
-  border-color: var(--blue);
-  background: var(--blue-pale);
-  color: var(--blue);
+  border-color: var(--pink);
+  background: rgba(233, 71, 245, 0.1);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(233, 71, 245, 0.2);
 }
 
 /* Sidebar */
@@ -343,5 +353,5 @@ hr {
 /* Table */
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 th { padding: 10px 12px; text-align: left; font-weight: 600; color: var(--text2); border-bottom: 2px solid var(--border); white-space: nowrap; }
-td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
-tr:hover td { background: var(--gray-pale); }
+td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; color: var(--text); }
+tr:hover td { background: rgba(255,255,255,0.05); }
