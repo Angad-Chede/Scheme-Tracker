@@ -94,8 +94,9 @@
 }
 
 .status-card.active {
-  border-color: var(--green);
-  background: var(--green-pale);
+  border-color: var(--pink);
+  background: rgba(233, 71, 245, 0.1);
+  box-shadow: 0 0 15px rgba(233, 71, 245, 0.2);
 }
 
 .status-card-emoji {
@@ -130,8 +131,9 @@
 }
 
 .doc-card.active {
-  border-color: var(--green);
-  background: var(--green-pale);
+  border-color: var(--pink);
+  background: rgba(233, 71, 245, 0.1);
+  box-shadow: 0 0 10px rgba(233, 71, 245, 0.1);
 }
 
 .doc-checkbox {

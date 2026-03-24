@@ -180,7 +180,16 @@
   background: linear-gradient(135deg, var(--blue), var(--pink));
   color: #fff;
   border: none;
-  box-shadow: 0 10px 30px rgba(233, 71, 245, 0.2);
+  box-shadow: 0 10px 30px rgba(233, 71, 245, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+.ai-card::after {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+  pointer-events: none;
 }
 
 .ai-card-inner {
