@@ -11,33 +11,35 @@
 }
 
 :root {
-  --blue: #1d4ed8;
+  --blue: #2F4BA2;
+  --pink: #E947F5;
   --blue-dark: #1e3a5f;
-  --blue-pale: #eff6ff;
-  --green: #059669;
-  --green-pale: #d1fae5;
-  --amber: #d97706;
-  --amber-pale: #fef3c7;
-  --red: #dc2626;
-  --red-pale: #fee2e2;
-  --gray: #64748b;
-  --gray-pale: #f1f5f9;
-  --border: #e2e8f0;
-  --border2: #cbd5e1;
-  --bg: #f8fafc;
-  --white: #fff;
-  --text: #0f172a;
-  --text2: #475569;
-  --text3: #94a3b8;
+  --blue-pale: rgba(47, 75, 162, 0.15);
+  --green: #10b981;
+  --green-pale: rgba(16, 185, 129, 0.1);
+  --amber: #f59e0b;
+  --amber-pale: rgba(245, 158, 11, 0.1);
+  --red: #ef4444;
+  --red-pale: rgba(239, 68, 68, 0.1);
+  --gray: #94a3b8;
+  --gray-pale: rgba(148, 163, 184, 0.1);
+  --border: rgba(255, 255, 255, 0.1);
+  --border2: rgba(255, 255, 255, 0.2);
+  --bg: #030712;
+  --card-bg: rgba(17, 24, 39, 0.7);
+  --white: #111827;
+  --text: #f9fafb;
+  --text2: #9ca3af;
+  --text3: #6b7280;
   --radius: 14px;
   --radius-sm: 8px;
-  --shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.6);
 
   /* ── Typography tokens ── */
-  --font-display:  'Bona Nova SC', serif;   /* grand display headings */
-  --font-heading:  'Bona Nova SC', serif;  /* section headings        */
-  --font-body:     'Bona Nova SC', serif;  /* body & UI copy          */
+  --font-display:  'Inter', sans-serif;
+  --font-heading:  'Inter', sans-serif;
+  --font-body:     'Inter', sans-serif;
 }
 
 body {
@@ -104,8 +106,9 @@ a {
 }
 
 .btn-primary:hover {
-  background: #1e40af;
+  background: #3a5bc0;
   transform: translateY(-1px);
+  box-shadow: 0 0 15px rgba(47, 75, 162, 0.4);
 }
 
 .btn-ghost {
@@ -132,11 +135,12 @@ a {
 
 /* Cards */
 .card {
-  background: var(--white);
+  background: var(--card-bg);
   border-radius: var(--radius);
   border: 1px solid var(--border);
   padding: 24px;
   box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
 }
 
 /* Badges */
@@ -162,13 +166,15 @@ a {
   border: 1.5px solid var(--border);
   border-radius: 10px;
   font-size: 14px;
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.03);
   color: var(--text);
-  transition: border-color 0.15s;
+  transition: all 0.2s;
 }
 
 .inp:focus {
   border-color: var(--blue);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 10px rgba(47, 75, 162, 0.3);
 }
 
 .lbl {
@@ -260,10 +266,11 @@ a {
 .sidebar {
   width: 240px;
   flex-shrink: 0;
-  background: var(--white);
+  background: rgba(17, 24, 39, 0.3);
   border-right: 1px solid var(--border);
   min-height: calc(100vh - 64px);
   padding: 20px 12px;
+  backdrop-filter: blur(10px);
 }
 
 .si {
