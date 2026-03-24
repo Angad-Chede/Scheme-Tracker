@@ -23,7 +23,7 @@
 .admin-sidebar-title {
   font-size: 16px;
   font-weight: 800;
-  color: var(--blue-dark);
+  color: #fff;
 }
 
 .admin-sidebar-subtitle {
@@ -36,6 +36,7 @@
   font-size: 24px;
   font-weight: 800;
   margin-bottom: 4px;
+  color: #fff;
 }
 
 .admin-overview-subtitle {
@@ -93,14 +94,14 @@
 .cat-dist-bar-track {
   width: 80px;
   height: 7px;
-  background: var(--gray-pale);
+  background: var(--border);
   border-radius: 4px;
   overflow: hidden;
 }
 
 .cat-dist-bar-fill {
   height: 100%;
-  background: var(--green);
+  background: var(--blue);
   border-radius: 4px;
 }
 
@@ -128,9 +129,9 @@
 }
 
 .btn-delete {
-  background: var(--red-pale);
+  background: rgba(239, 68, 68, 0.1);
   color: var(--red);
-  border: none;
+  border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
 /* Analytics tab */

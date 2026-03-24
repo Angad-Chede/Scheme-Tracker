@@ -21,6 +21,7 @@
   font-size: 30px;
   font-weight: 800;
   margin-bottom: 8px;
+  color: #fff;
 }
 
 .checker-subtitle {
@@ -72,6 +73,7 @@
 .step-section-title {
   font-size: 20px;
   margin-bottom: 20px;
+  color: #fff;
 }
 
 .step-section-subtitle {
@@ -86,8 +88,9 @@
   border-radius: 12px;
   border: 2px solid var(--border);
   cursor: pointer;
-  background: var(--white);
+  background: rgba(17, 24, 39, 0.6);
   transition: all 0.15s;
+  backdrop-filter: blur(8px);
 }
 
 .status-card.active {
@@ -104,6 +107,7 @@
   font-weight: 700;
   font-size: 14px;
   margin-bottom: 2px;
+  color: #fff;
 }
 
 .status-card-desc {
@@ -120,8 +124,9 @@
   border-radius: 10px;
   border: 2px solid var(--border);
   cursor: pointer;
-  background: var(--white);
+  background: rgba(17, 24, 39, 0.6);
   transition: all 0.15s;
+  backdrop-filter: blur(8px);
 }
 
 .doc-card.active {

@@ -17,6 +17,7 @@
   font-size: 26px;
   font-weight: 800;
   margin-bottom: 4px;
+  color: #fff;
 }
 
 .dashboard-meta {
@@ -30,7 +31,7 @@
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  background: var(--blue-dark);
+  background: var(--blue);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,6 +39,7 @@
   font-weight: 800;
   color: #fff;
   margin-bottom: 10px;
+  box-shadow: 0 0 15px rgba(47, 75, 162, 0.3);
 }
 
 .sidebar-user-name {
@@ -65,8 +67,8 @@
 /* Profile completion banner */
 .profile-completion-card {
   margin-bottom: 20px;
-  background: var(--blue-pale);
-  border-color: #bfdbfe;
+  background: rgba(47, 75, 162, 0.1);
+  border-color: rgba(47, 75, 162, 0.3);
 }
 
 .profile-completion-header {
@@ -111,7 +113,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 14px;
-  background: var(--green-pale);
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
   border-radius: 10px;
 }
 
@@ -174,8 +177,10 @@
 
 /* AI Assistant card */
 .ai-card {
-  background: linear-gradient(135deg, #1e3a5f, #1d4ed8);
+  background: linear-gradient(135deg, var(--blue), var(--pink));
   color: #fff;
+  border: none;
+  box-shadow: 0 10px 30px rgba(233, 71, 245, 0.2);
 }
 
 .ai-card-inner {
