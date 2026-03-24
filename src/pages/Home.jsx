@@ -2,6 +2,7 @@ import { useState } from 'react';
 import '../styles/home.css';
 import CountUp from '../components/CountUp';
 import { CATS } from '../data';
+import FloatingLines from '../components/FloatingLines';
 
 const TESTIMONIALS = [
   { color: 'green', quote: 'I had no idea I was eligible for 5 schemes until SchemeTracker matched my profile. Applied for PM Kisan within minutes!', name: 'Rajesh Kumar', role: 'Farmer, Bihar' },
@@ -20,10 +21,10 @@ const FEATURES = [
 ];
 
 const SCHEMES = [
-  { cat: 'AGRICULTURE', name: 'PM Kisan Samman Nidhi', benefit: '₹6,000/year',   tags: ['Farmer', 'Land Owner'], status: 'eligible' },
-  { cat: 'HEALTHCARE',  name: 'Ayushman Bharat',       benefit: '₹5L Coverage',  tags: ['Below Poverty Line', 'Health'], status: 'eligible' },
-  { cat: 'HOUSING',     name: 'PM Awas Yojana',        benefit: '₹2.67L Subsidy',tags: ['Urban', 'Low Income'], status: 'docs' },
-  { cat: 'BUSINESS',    name: 'Mudra Loan Scheme',     benefit: 'Up to ₹10L Loan',tags: ['Entrepreneur', 'MSME'], status: 'eligible' },
+  { cat: 'AGRICULTURE', name: 'PM Kisan Samman Nidhi', benefit: '₹6,000/year', tags: ['Farmer', 'Land Owner'], status: 'eligible' },
+  { cat: 'HEALTHCARE',  name: 'Ayushman Bharat',       benefit: '₹5L Coverage', tags: ['Below Poverty Line', 'Health'], status: 'eligible' },
+  { cat: 'HOUSING',     name: 'PM Awas Yojana',        benefit: '₹2.67L Subsidy', tags: ['Urban', 'Low Income'], status: 'docs' },
+  { cat: 'BUSINESS',    name: 'Mudra Loan Scheme',     benefit: 'Up to ₹10L Loan', tags: ['Entrepreneur', 'MSME'], status: 'eligible' },
 ];
 
 const FAQ_ITEMS = [
@@ -44,15 +45,37 @@ export default function Home({ navigate, setFilter }) {
 
   return (
     <div className="home-root">
-
       {/* ── HERO ── */}
-      <section className="hero2">
-        <div className="hero2-inner">
+      <section className="hero2" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            zIndex: 0,
+            pointerEvents: 'none',
+          }}
+        >
+          <FloatingLines
+            enabledWaves={['top', 'middle', 'bottom']}
+            lineCount={5}
+            lineDistance={5}
+            bendRadius={5}
+            bendStrength={-0.5}
+            interactive={true}
+            parallax={true}
+          />
+        </div>
+
+        <div className="hero2-inner" style={{ position: 'relative', zIndex: 1 }}>
           <div className="hero2-left">
             <span className="hero2-badge">✦ Smart Government Scheme Discovery</span>
             <h1 className="hero2-title">
-              Find Every<br />
-              <span className="hero2-title-blue">Government Scheme</span><br />
+              Find Every
+              <br />
+              <span className="hero2-title-blue">Government Scheme</span>
+              <br />
               You Deserve
             </h1>
             <p className="hero2-subtitle">
@@ -89,8 +112,8 @@ export default function Home({ navigate, setFilter }) {
 
                 {[
                   { name: 'PM Kisan Samman Nidhi', sub: '₹6,000/year • Agriculture', badge: 'Eligible', badgeClass: 'badge-green' },
-                  { name: 'Ayushman Bharat',       sub: '₹5L Coverage • Health',     badge: 'Eligible', badgeClass: 'badge-blue' },
-                  { name: 'PM Awas Yojana',        sub: 'Housing Subsidy • Urban',   badge: '95% Match', badgeClass: 'badge-amber' },
+                  { name: 'Ayushman Bharat', sub: '₹5L Coverage • Health', badge: 'Eligible', badgeClass: 'badge-blue' },
+                  { name: 'PM Awas Yojana', sub: 'Housing Subsidy • Urban', badge: '95% Match', badgeClass: 'badge-amber' },
                 ].map(s => (
                   <div key={s.name} className="mockup-row">
                     <div>
@@ -102,7 +125,9 @@ export default function Home({ navigate, setFilter }) {
                 ))}
 
                 <div className="mockup-progress-row">
-                  <div className="mockup-progress-bar"><div className="mockup-progress-fill"></div></div>
+                  <div className="mockup-progress-bar">
+                    <div className="mockup-progress-fill"></div>
+                  </div>
                   <span className="mockup-progress-label">75%</span>
                 </div>
               </div>
@@ -114,14 +139,15 @@ export default function Home({ navigate, setFilter }) {
       {/* ── STATS STRIP ── */}
       <section className="stats-strip">
         {[
-          { num: 30,   suffix: '+',  label: 'Schemes Tracked' },
-          { num: 10,   suffix: 'k+', label: 'Eligibility Checks' },
-          { num: 95,   suffix: '%',  label: 'Faster Discovery' },
-          { num: 12,   suffix: '+',  label: 'Beneficiary Categories' },
+          { num: 30, suffix: '+', label: 'Schemes Tracked' },
+          { num: 10, suffix: 'k+', label: 'Eligibility Checks' },
+          { num: 95, suffix: '%', label: 'Faster Discovery' },
+          { num: 12, suffix: '+', label: 'Beneficiary Categories' },
         ].map(s => (
           <div key={s.label} className="stat-item">
             <div className="stat-num">
-              <CountUp from={0} to={s.num} duration={2} />{s.suffix}
+              <CountUp from={0} to={s.num} duration={2} />
+              {s.suffix}
             </div>
             <div className="stat-label">{s.label.toUpperCase()}</div>
           </div>
@@ -129,14 +155,20 @@ export default function Home({ navigate, setFilter }) {
       </section>
 
       <div className="home-container">
-
         {/* ── CATEGORIES ── */}
         <div className="section-label">CATEGORIES</div>
         <h2 className="section-title">Schemes for Every Indian</h2>
         <p className="section-subtitle">From farmers to students, women to senior citizens</p>
         <div className="cat-grid">
           {CATS.map(cat => (
-            <div key={cat} className="cat-card" onClick={() => { setFilter(cat); navigate('schemes'); }}>
+            <div
+              key={cat}
+              className="cat-card"
+              onClick={() => {
+                setFilter(cat);
+                navigate('schemes');
+              }}
+            >
               <span className="cat-name">{cat}</span>
               <span className="cat-arrow">→</span>
             </div>
@@ -145,16 +177,18 @@ export default function Home({ navigate, setFilter }) {
 
         {/* ── HOW IT WORKS ── */}
         <div className="section-label">PROCESS</div>
-        <h2 className="section-title">How <span className="text-blue">SchemeTracker</span> Works</h2>
+        <h2 className="section-title">
+          How <span className="text-blue">SchemeTracker</span> Works
+        </h2>
         <p className="section-subtitle">Four simple steps to discover your benefits</p>
 
         <div className="how-timeline">
           <div className="how-timeline-line"></div>
           {[
-            { icon: '👤', title: 'Create Your Profile',       desc: 'Share basic details like age, income, occupation, and location.' },
-            { icon: '🔍', title: 'Check Eligibility',          desc: 'Our engine scans 30+ schemes and matches them to your profile instantly.' },
-            { icon: '☑️', title: 'Get Personalized Schemes',   desc: 'See which schemes you qualify for with benefits, deadlines, and requirements.' },
-            { icon: '📋', title: 'Complete Documents',          desc: 'Know exactly which documents are missing and how to get them.' },
+            { icon: '👤', title: 'Create Your Profile', desc: 'Share basic details like age, income, occupation, and location.' },
+            { icon: '🔍', title: 'Check Eligibility', desc: 'Our engine scans 30+ schemes and matches them to your profile instantly.' },
+            { icon: '☑️', title: 'Get Personalized Schemes', desc: 'See which schemes you qualify for with benefits, deadlines, and requirements.' },
+            { icon: '📋', title: 'Complete Documents', desc: 'Know exactly which documents are missing and how to get them.' },
           ].map((step, i) => (
             <div key={i} className={`how-step ${i % 2 === 0 ? 'how-step-left' : 'how-step-right'}`}>
               <div className="how-step-card">
@@ -169,7 +203,9 @@ export default function Home({ navigate, setFilter }) {
 
         {/* ── FEATURES ── */}
         <div className="section-label">FEATURES</div>
-        <h2 className="section-title">Everything You Need to <span className="text-blue">Claim Your Benefits</span></h2>
+        <h2 className="section-title">
+          Everything You Need to <span className="text-blue">Claim Your Benefits</span>
+        </h2>
         <div className="features-grid">
           {FEATURES.map((f, i) => (
             <div key={f.title} className={`feature-item ${i % 2 === 0 ? 'feature-item-left' : 'feature-item-right'}`}>
@@ -190,7 +226,9 @@ export default function Home({ navigate, setFilter }) {
 
         {/* ── SCHEME EXPLORER ── */}
         <div className="section-label">SCHEME EXPLORER</div>
-        <h2 className="section-title">Discover Schemes <span className="text-blue">Tailored for You</span></h2>
+        <h2 className="section-title">
+          Discover Schemes <span className="text-blue">Tailored for You</span>
+        </h2>
         <p className="section-subtitle">Browse featured government schemes with instant eligibility indicators.</p>
         <div className="schemes-preview-grid">
           {SCHEMES.map(s => (
@@ -199,7 +237,11 @@ export default function Home({ navigate, setFilter }) {
               <h3 className="scheme-preview-name">{s.name}</h3>
               <div className="scheme-preview-benefit">{s.benefit}</div>
               <div className="scheme-preview-tags">
-                {s.tags.map(t => <span key={t} className="scheme-tag">{t}</span>)}
+                {s.tags.map(t => (
+                  <span key={t} className="scheme-tag">
+                    {t}
+                  </span>
+                ))}
               </div>
               <div className={`scheme-preview-status ${s.status === 'docs' ? 'status-docs' : 'status-eligible'}`}>
                 {s.status === 'docs' ? '⚠ Documents Missing' : '✓ Eligible'}
@@ -207,53 +249,70 @@ export default function Home({ navigate, setFilter }) {
             </div>
           ))}
         </div>
-
-        {/* ── WITHOUT / WITH ── */}
       </div>
 
       <section className="compare-section">
         <div className="section-label white">THE PROBLEM &amp; SOLUTION</div>
-        <h2 className="compare-title">Why Millions Miss Their <span className="text-teal">Entitled Benefits</span></h2>
+        <h2 className="compare-title">
+          Why Millions Miss Their <span className="text-teal">Entitled Benefits</span>
+        </h2>
         <div className="compare-grid">
           <div className="compare-col">
             <div className="compare-col-head red">WITHOUT SCHEMETRACKER</div>
-            {['You miss schemes you actually qualify for', 'Eligibility rules are complex and confusing', 'Documents scattered across departments', 'Government portals are hard to navigate'].map(t => (
-              <div key={t} className="compare-row compare-row-bad"><span className="compare-x">✕</span>{t}</div>
+            {[
+              'You miss schemes you actually qualify for',
+              'Eligibility rules are complex and confusing',
+              'Documents scattered across departments',
+              'Government portals are hard to navigate',
+            ].map(t => (
+              <div key={t} className="compare-row compare-row-bad">
+                <span className="compare-x">✕</span>
+                {t}
+              </div>
             ))}
           </div>
           <div className="compare-col">
             <div className="compare-col-head green">WITH SCHEMETRACKER</div>
-            {['Instant matching against 30+ schemes', 'Simple profile-based eligibility engine', 'Missing document detection & guidance', 'One unified, intuitive dashboard'].map(t => (
-              <div key={t} className="compare-row compare-row-good"><span className="compare-check">✓</span>{t}</div>
+            {[
+              'Instant matching against 30+ schemes',
+              'Simple profile-based eligibility engine',
+              'Missing document detection & guidance',
+              'One unified, intuitive dashboard',
+            ].map(t => (
+              <div key={t} className="compare-row compare-row-good">
+                <span className="compare-check">✓</span>
+                {t}
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       <div className="home-container">
-
         {/* ── TESTIMONIALS ── */}
         <div className="section-label">TESTIMONIALS</div>
         <div className="testimonials-section">
           <div className="testimonials-left">
-            <h2 className="testimonials-heading">TRUSTED BY<br/>THOUSANDS</h2>
+            <h2 className="testimonials-heading">
+              TRUSTED BY
+              <br />
+              THOUSANDS
+            </h2>
             <p className="testimonials-sub">See the stories of people who discovered their government benefits.</p>
             <div className="testimonials-navs">
-              <button
-                className={`t-nav-btn ${sliderIdx > 0 ? 't-nav-active' : ''}`}
-                onClick={() => moveSlider(-1)}
-              >←</button>
+              <button className={`t-nav-btn ${sliderIdx > 0 ? 't-nav-active' : ''}`} onClick={() => moveSlider(-1)}>
+                ←
+              </button>
               <button
                 className={`t-nav-btn ${sliderIdx < TESTIMONIALS.length - 2 ? 't-nav-active' : ''}`}
                 onClick={() => moveSlider(1)}
-              >→</button>
+              >
+                →
+              </button>
             </div>
           </div>
           <div className="testimonials-cards-area">
-            <div
-              className="testimonials-track"
-              style={{ transform: `translateX(calc(-${sliderIdx} * (50% + 10px)))` }}
-            >
+            <div className="testimonials-track" style={{ transform: `translateX(calc(-${sliderIdx} * (50% + 10px)))` }}>
               {TESTIMONIALS.map(t => (
                 <div key={t.name} className={`t-card t-card--${t.color}`}>
                   <div className="t-card-logo">▶</div>
@@ -268,7 +327,9 @@ export default function Home({ navigate, setFilter }) {
 
         {/* ── FAQ ── */}
         <div className="section-label">FAQ</div>
-        <h2 className="section-title">Common <span className="text-blue">Questions</span></h2>
+        <h2 className="section-title">
+          Common <span className="text-blue">Questions</span>
+        </h2>
         <div className="faq-list">
           {FAQ_ITEMS.map((item, i) => (
             <div key={i} className={`faq-item ${openFaq === i ? 'faq-open' : ''}`}>
@@ -284,7 +345,9 @@ export default function Home({ navigate, setFilter }) {
         {/* ── CTA BANNER ── */}
         <div className="cta-banner">
           <h2 className="cta-title">Don't Miss Schemes You Deserve</h2>
-          <p className="cta-subtitle">Join thousands of Indians who discovered their government benefits using SchemeTracker. It's free, instant, and private.</p>
+          <p className="cta-subtitle">
+            Join thousands of Indians who discovered their government benefits using SchemeTracker. It's free, instant, and private.
+          </p>
           <button className="btn btn-lg cta-btn" onClick={() => navigate('checker')}>
             <span className="cta-btn-label">Check Your Eligibility Now</span>
             <span className="cta-btn-hover">
@@ -299,8 +362,12 @@ export default function Home({ navigate, setFilter }) {
         <footer className="home-footer2">
           <div className="footer-top">
             <div className="footer-brand-col">
-              <div className="footer-brand">Scheme<span>Tracker</span></div>
-              <p className="footer-brand-desc">Helping every Indian citizen discover and claim the government benefits they deserve.</p>
+              <div className="footer-brand">
+                Scheme<span>Tracker</span>
+              </div>
+              <p className="footer-brand-desc">
+                Helping every Indian citizen discover and claim the government benefits they deserve.
+              </p>
             </div>
             <div className="footer-links-col">
               <div className="footer-col-title">Product</div>
@@ -326,10 +393,11 @@ export default function Home({ navigate, setFilter }) {
           </div>
           <div className="footer-bottom">
             <span>© 2024 SchemeTracker. All rights reserved.</span>
-            <span className="footer-disclaimer">*For demonstration purposes only. Not affiliated with any government body. Always verify from official portals.</span>
+            <span className="footer-disclaimer">
+              *For demonstration purposes only. Not affiliated with any government body. Always verify from official portals.
+            </span>
           </div>
         </footer>
-
       </div>
     </div>
   );
