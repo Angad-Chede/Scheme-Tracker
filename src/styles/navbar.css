@@ -21,7 +21,7 @@
 .nav-brand {
   font-family: var(--font-display);
   font-optical-sizing: auto;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 800;
   color: var(--blue-dark);
   cursor: pointer;
@@ -157,6 +157,10 @@
   font-size: 13px;
   color: var(--text2);
   font-weight: 500;
+}
+
+.nav-brand-blue {
+  color: var(--blue);
 }
 
 @media (max-width: 700px) {
