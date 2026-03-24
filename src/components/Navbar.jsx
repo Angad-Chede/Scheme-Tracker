@@ -12,7 +12,7 @@ export default function Navbar({ page, user, navigate, onSignOut }) {
 
   return (
     <nav className="nav">
-      <div className="nav-brand" onClick={() => navigate('home')}>SchemeTracker</div>
+      <div className="nav-brand" onClick={() => navigate('home')}>Scheme<span className="nav-brand-blue">Tracker</span></div>
 
       <div className="nav-links">
         {links.map(([pg, label]) => (
