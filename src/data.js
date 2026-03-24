@@ -37,9 +37,9 @@ export const STATES = ["Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chh
 
 export const DOCS = ['Aadhaar Card','PAN Card','Bank Passbook','Income Certificate','Caste Certificate','Disability Certificate','Domicile Certificate','Ration Card','Land Records','Birth Certificate'];
 
-export const CAT_EMOJI = {'Agriculture':'🌾','Healthcare':'🏥','Housing':'🏠','Employment':'💼','Education':'🎓','Women Empowerment':'👩','Insurance':'🛡️','Pension':'👴','Financial Inclusion':'🏦','Welfare':'🔥','Startups / MSME':'💡','Disability Welfare':'♿','Digital Inclusion':'📱'};
+export const CAT_EMOJI = {'Agriculture':'🌾','Healthcare':'🏥','Housing':'🏠','Employment':'💼','Education':'🎓','Women Empowerment':'👩','Insurance':'🛡️','Pension':'👴','Financial Inclusion':'🏦','Welfare':'🔥','Startups / MSME':'💡','Disability Welfare':'♿'};
 
-export const CAT_COLORS = {'Agriculture':'#d1fae5','Healthcare':'#fee2e2','Housing':'#ede9fe','Employment':'#fef3c7','Education':'#dbeafe','Women Empowerment':'#fce7f3','Insurance':'#e0f2fe','Pension':'#fef9c3','Financial Inclusion':'#d1fae5','Welfare':'#fef3c7','Startups / MSME':'#f0fdf4','Disability Welfare':'#f0f9ff','Digital Inclusion':'#faf5ff'};
+export const CAT_COLORS = {'Agriculture':'#d1fae5','Healthcare':'#fee2e2','Housing':'#ede9fe','Employment':'#fef3c7','Education':'#dbeafe','Women Empowerment':'#fce7f3','Insurance':'#e0f2fe','Pension':'#fef9c3','Financial Inclusion':'#d1fae5','Welfare':'#fef3c7','Startups / MSME':'#f0fdf4','Disability Welfare':'#f0f9ff'};
 
 export function checkEligibility(scheme, profile) {
   if (!profile || !profile.age) return {status:'unknown',score:0,matched:[],missing:[],missingDocs:[]};
