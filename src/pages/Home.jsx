@@ -1,144 +1,335 @@
+import { useState } from 'react';
 import '../styles/home.css';
 import CountUp from '../components/CountUp';
-import { CATS, CAT_EMOJI, CAT_COLORS } from '../data';
+import { CATS } from '../data';
+
+const TESTIMONIALS = [
+  { color: 'green', quote: 'I had no idea I was eligible for 5 schemes until SchemeTracker matched my profile. Applied for PM Kisan within minutes!', name: 'Rajesh Kumar', role: 'Farmer, Bihar' },
+  { color: 'dark',  quote: 'The missing documents feature saved me weeks of running around. Everything was listed clearly with what I needed to do.', name: 'Priya Sharma', role: 'Small Business Owner, Maharashtra' },
+  { color: 'dark',  quote: 'As a student from a rural area, I found scholarship schemes I never knew existed. This tool should be used by everyone.', name: 'Amit Patel', role: 'Student, Gujarat' },
+  { color: 'green', quote: 'Got the Mudra loan scheme details instantly. The eligibility score showed exactly what I was missing. Applied within a week!', name: 'Mohammed Ali', role: 'Small Business Owner, UP' },
+];
+
+const FEATURES = [
+  { tag: 'CORE',       title: 'Smart Eligibility Engine',        desc: 'AI-powered matching analyzes your profile against complex eligibility criteria across all schemes simultaneously.' },
+  { tag: 'SMART',      title: 'Missing Documents Detection',      desc: 'Instantly identify which documents you need to complete your application — no guesswork.' },
+  { tag: 'AI',         title: 'Personalized Recommendations',     desc: 'Get scheme suggestions ranked by relevance to your unique profile and circumstances.' },
+  { tag: 'TRACK',      title: 'Deadlines & Benefits',             desc: 'Track application deadlines and understand exact benefits for each scheme you qualify for.' },
+  { tag: 'ORGANIZER',  title: 'Bookmark & Track',                 desc: 'Save schemes of interest and track your application progress in one dashboard.' },
+  { tag: 'ADMIN',      title: 'Admin Management',                 desc: 'Comprehensive admin tools for managing schemes, categories, and user analytics.' },
+];
+
+const SCHEMES = [
+  { cat: 'AGRICULTURE', name: 'PM Kisan Samman Nidhi', benefit: '₹6,000/year',   tags: ['Farmer', 'Land Owner'], status: 'eligible' },
+  { cat: 'HEALTHCARE',  name: 'Ayushman Bharat',       benefit: '₹5L Coverage',  tags: ['Below Poverty Line', 'Health'], status: 'eligible' },
+  { cat: 'HOUSING',     name: 'PM Awas Yojana',        benefit: '₹2.67L Subsidy',tags: ['Urban', 'Low Income'], status: 'docs' },
+  { cat: 'BUSINESS',    name: 'Mudra Loan Scheme',     benefit: 'Up to ₹10L Loan',tags: ['Entrepreneur', 'MSME'], status: 'eligible' },
+];
+
+const FAQ_ITEMS = [
+  { q: 'Is this an official government portal?', a: 'No, SchemeTracker is an independent platform that helps you discover and understand government schemes. Always verify eligibility from official government portals before applying.' },
+  { q: 'How accurate is the eligibility check?', a: 'Our rule engine is based on official eligibility criteria from government notifications. We aim for 95%+ accuracy, but recommend verifying with official sources.' },
+  { q: 'What documents do I need?', a: 'Documents vary by scheme. After checking eligibility, we show you a personalized document checklist for each scheme you qualify for.' },
+  { q: 'Can I save schemes for later?', a: 'Yes! Create a free account to bookmark schemes, track your application progress, and get deadline reminders.' },
+  { q: 'Is my data secure?', a: 'Absolutely. We never share your personal data with third parties. Your profile is stored securely and used only for eligibility matching.' },
+];
 
 export default function Home({ navigate, setFilter }) {
+  const [sliderIdx, setSliderIdx] = useState(0);
+  const [openFaq, setOpenFaq] = useState(null);
+
+  function moveSlider(dir) {
+    setSliderIdx(prev => Math.max(0, Math.min(prev + dir, TESTIMONIALS.length - 2)));
+  }
+
   return (
-    <div>
-      {/* Hero */}
-      <div className="hero">
-        <div className="hero-inner">
-          <div className="hero-content">
-            <span className="badge b-blue hero-badge">🇮🇳 Government Scheme Eligibility Platform</span>
-            <h1 className="hero-title">Discover Every Scheme You Deserve</h1>
-            <p className="hero-subtitle">
-              Stop missing out on government benefits. Answer a few questions and instantly discover
-              all central &amp; state schemes you qualify for — with required documents and application links.
+    <div className="home-root">
+
+      {/* ── HERO ── */}
+      <section className="hero2">
+        <div className="hero2-inner">
+          <div className="hero2-left">
+            <span className="hero2-badge">✦ Smart Government Scheme Discovery</span>
+            <h1 className="hero2-title">
+              Find Every<br />
+              <span className="hero2-title-blue">Government Scheme</span><br />
+              You Deserve
+            </h1>
+            <p className="hero2-subtitle">
+              Stop missing benefits you qualify for. SchemeTracker intelligently
+              matches your profile against 30+ government schemes and tells you
+              exactly what you're eligible for — in seconds.
             </p>
-            <div className="hero-actions">
-              <button className="btn btn-lg hero-btn-primary" onClick={() => navigate('checker')}>Check My Eligibility</button>
-              <button className="btn btn-lg hero-btn-outline" onClick={() => navigate('schemes')}>Explore All Schemes</button>
+            <div className="hero2-actions">
+              <button className="btn hero2-btn-primary" onClick={() => navigate('checker')}>
+                Check Eligibility →
+              </button>
+              <button className="btn hero2-btn-outline" onClick={() => navigate('schemes')}>
+                Explore Schemes
+              </button>
             </div>
-            <div className="hero-stats">
-              <div>
-                <div className="hero-stat-number">
-                  <CountUp
-                    from={0}
-                    to={30}
-                    separator=","
-                    direction="up"
-                    duration={2}
-                  />
-                  +
-                </div>
-                <div className="hero-stat-label">Govt. Schemes</div>
-              </div>
+            <div className="hero2-trust">
+              <span>✓ 100% Free</span>
+              <span>👥 10k+ Users</span>
+              <span>⚡ Instant Results</span>
+            </div>
+          </div>
 
-              <div>
-                <div className="hero-stat-number">
-                  ₹
-                  <CountUp
-                    from={0}
-                    to={10}
-                    separator=","
-                    direction="up"
-                    duration={2.2}
-                  />
-                  L+
-                </div>
-                <div className="hero-stat-label">Avg. Benefits/Year</div>
+          <div className="hero2-right">
+            <div className="hero2-mockup">
+              <div className="mockup-bar">
+                <span className="mockup-dot red"></span>
+                <span className="mockup-dot yellow"></span>
+                <span className="mockup-dot green"></span>
+                <span className="mockup-title">SchemeTracker Dashboard</span>
               </div>
+              <div className="mockup-body">
+                <div className="mockup-floating mockup-f1">PM Kisan ✓</div>
+                <div className="mockup-floating mockup-f2">Ayushman Bharat</div>
 
-              <div>
-                <div className="hero-stat-number">
-                  <CountUp
-                    from={0}
-                    to={95}
-                    separator=","
-                    direction="up"
-                    duration={2}
-                  />
-                  %
+                {[
+                  { name: 'PM Kisan Samman Nidhi', sub: '₹6,000/year • Agriculture', badge: 'Eligible', badgeClass: 'badge-green' },
+                  { name: 'Ayushman Bharat',       sub: '₹5L Coverage • Health',     badge: 'Eligible', badgeClass: 'badge-blue' },
+                  { name: 'PM Awas Yojana',        sub: 'Housing Subsidy • Urban',   badge: '95% Match', badgeClass: 'badge-amber' },
+                ].map(s => (
+                  <div key={s.name} className="mockup-row">
+                    <div>
+                      <div className="mockup-row-name">{s.name}</div>
+                      <div className="mockup-row-sub">{s.sub}</div>
+                    </div>
+                    <span className={`mockup-badge ${s.badgeClass}`}>{s.badge}</span>
+                  </div>
+                ))}
+
+                <div className="mockup-progress-row">
+                  <div className="mockup-progress-bar"><div className="mockup-progress-fill"></div></div>
+                  <span className="mockup-progress-label">75%</span>
                 </div>
-                <div className="hero-stat-label">Accuracy Rate</div>
               </div>
-            </div>            
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* ── STATS STRIP ── */}
+      <section className="stats-strip">
+        {[
+          { num: 30,   suffix: '+',  label: 'Schemes Tracked' },
+          { num: 10,   suffix: 'k+', label: 'Eligibility Checks' },
+          { num: 95,   suffix: '%',  label: 'Faster Discovery' },
+          { num: 12,   suffix: '+',  label: 'Beneficiary Categories' },
+        ].map(s => (
+          <div key={s.label} className="stat-item">
+            <div className="stat-num">
+              <CountUp from={0} to={s.num} duration={2} />{s.suffix}
+            </div>
+            <div className="stat-label">{s.label.toUpperCase()}</div>
+          </div>
+        ))}
+      </section>
 
       <div className="home-container">
-        {/* Categories */}
+
+        {/* ── CATEGORIES ── */}
+        <div className="section-label">CATEGORIES</div>
         <h2 className="section-title">Schemes for Every Indian</h2>
         <p className="section-subtitle">From farmers to students, women to senior citizens</p>
         <div className="cat-grid">
           {CATS.map(cat => (
+            <div key={cat} className="cat-card" onClick={() => { setFilter(cat); navigate('schemes'); }}>
+              <span className="cat-name">{cat}</span>
+              <span className="cat-arrow">→</span>
+            </div>
+          ))}
+        </div>
+
+        {/* ── HOW IT WORKS ── */}
+        <div className="section-label">PROCESS</div>
+        <h2 className="section-title">How <span className="text-blue">SchemeTracker</span> Works</h2>
+        <p className="section-subtitle">Four simple steps to discover your benefits</p>
+
+        <div className="how-timeline">
+          <div className="how-timeline-line"></div>
+          {[
+            { icon: '👤', title: 'Create Your Profile',       desc: 'Share basic details like age, income, occupation, and location.' },
+            { icon: '🔍', title: 'Check Eligibility',          desc: 'Our engine scans 30+ schemes and matches them to your profile instantly.' },
+            { icon: '☑️', title: 'Get Personalized Schemes',   desc: 'See which schemes you qualify for with benefits, deadlines, and requirements.' },
+            { icon: '📋', title: 'Complete Documents',          desc: 'Know exactly which documents are missing and how to get them.' },
+          ].map((step, i) => (
+            <div key={i} className={`how-step ${i % 2 === 0 ? 'how-step-left' : 'how-step-right'}`}>
+              <div className="how-step-card">
+                <div className="how-step-icon">{step.icon}</div>
+                <h3 className="how-step-title">{step.title}</h3>
+                <p className="how-step-desc">{step.desc}</p>
+              </div>
+              <div className="how-step-dot"></div>
+            </div>
+          ))}
+        </div>
+
+        {/* ── FEATURES ── */}
+        <div className="section-label">FEATURES</div>
+        <h2 className="section-title">Everything You Need to <span className="text-blue">Claim Your Benefits</span></h2>
+        <div className="features-grid">
+          {FEATURES.map((f, i) => (
+            <div key={f.title} className={`feature-item ${i % 2 === 0 ? 'feature-item-left' : 'feature-item-right'}`}>
+              <div className="feature-card">
+                <div className="feature-tag-row">
+                  <span className="feature-icon-box">{f.icon}</span>
+                  <span className="feature-tag">{f.tag}</span>
+                </div>
+                <h3 className="feature-title">{f.title}</h3>
+                <p className="feature-desc">{f.desc}</p>
+              </div>
+              <div className="feature-visual">
+                <span className="feature-visual-icon">{f.icon}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ── SCHEME EXPLORER ── */}
+        <div className="section-label">SCHEME EXPLORER</div>
+        <h2 className="section-title">Discover Schemes <span className="text-blue">Tailored for You</span></h2>
+        <p className="section-subtitle">Browse featured government schemes with instant eligibility indicators.</p>
+        <div className="schemes-preview-grid">
+          {SCHEMES.map(s => (
+            <div key={s.name} className="scheme-preview-card">
+              <div className="scheme-preview-cat">{s.cat}</div>
+              <h3 className="scheme-preview-name">{s.name}</h3>
+              <div className="scheme-preview-benefit">{s.benefit}</div>
+              <div className="scheme-preview-tags">
+                {s.tags.map(t => <span key={t} className="scheme-tag">{t}</span>)}
+              </div>
+              <div className={`scheme-preview-status ${s.status === 'docs' ? 'status-docs' : 'status-eligible'}`}>
+                {s.status === 'docs' ? '⚠ Documents Missing' : '✓ Eligible'}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ── WITHOUT / WITH ── */}
+      </div>
+
+      <section className="compare-section">
+        <div className="section-label white">THE PROBLEM &amp; SOLUTION</div>
+        <h2 className="compare-title">Why Millions Miss Their <span className="text-teal">Entitled Benefits</span></h2>
+        <div className="compare-grid">
+          <div className="compare-col">
+            <div className="compare-col-head red">WITHOUT SCHEMETRACKER</div>
+            {['You miss schemes you actually qualify for', 'Eligibility rules are complex and confusing', 'Documents scattered across departments', 'Government portals are hard to navigate'].map(t => (
+              <div key={t} className="compare-row compare-row-bad"><span className="compare-x">✕</span>{t}</div>
+            ))}
+          </div>
+          <div className="compare-col">
+            <div className="compare-col-head green">WITH SCHEMETRACKER</div>
+            {['Instant matching against 30+ schemes', 'Simple profile-based eligibility engine', 'Missing document detection & guidance', 'One unified, intuitive dashboard'].map(t => (
+              <div key={t} className="compare-row compare-row-good"><span className="compare-check">✓</span>{t}</div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="home-container">
+
+        {/* ── TESTIMONIALS ── */}
+        <div className="section-label">TESTIMONIALS</div>
+        <div className="testimonials-section">
+          <div className="testimonials-left">
+            <h2 className="testimonials-heading">TRUSTED BY<br/>THOUSANDS</h2>
+            <p className="testimonials-sub">See the stories of people who discovered their government benefits.</p>
+            <div className="testimonials-navs">
+              <button
+                className={`t-nav-btn ${sliderIdx > 0 ? 't-nav-active' : ''}`}
+                onClick={() => moveSlider(-1)}
+              >←</button>
+              <button
+                className={`t-nav-btn ${sliderIdx < TESTIMONIALS.length - 2 ? 't-nav-active' : ''}`}
+                onClick={() => moveSlider(1)}
+              >→</button>
+            </div>
+          </div>
+          <div className="testimonials-cards-area">
             <div
-              key={cat}
-              className="cat-card"
-              style={{ background: CAT_COLORS[cat] || '#f1f5f9' }}
-              onClick={() => { setFilter(cat); navigate('schemes'); }}
+              className="testimonials-track"
+              style={{ transform: `translateX(calc(-${sliderIdx} * (50% + 10px)))` }}
             >
-              <div className="cat-icon">{CAT_EMOJI[cat] || '📌'}</div>
-              <div className="cat-name">{cat}</div>
+              {TESTIMONIALS.map(t => (
+                <div key={t.name} className={`t-card t-card--${t.color}`}>
+                  <div className="t-card-logo">▶</div>
+                  <p className="t-card-quote">"{t.quote}"</p>
+                  <div className="t-card-name">{t.name}</div>
+                  <div className="t-card-role">{t.role}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── FAQ ── */}
+        <div className="section-label">FAQ</div>
+        <h2 className="section-title">Common <span className="text-blue">Questions</span></h2>
+        <div className="faq-list">
+          {FAQ_ITEMS.map((item, i) => (
+            <div key={i} className={`faq-item ${openFaq === i ? 'faq-open' : ''}`}>
+              <button className="faq-question" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+                <span>{item.q}</span>
+                <span className="faq-chevron">{openFaq === i ? '∧' : '∨'}</span>
+              </button>
+              {openFaq === i && <div className="faq-answer">{item.a}</div>}
             </div>
           ))}
         </div>
 
-        {/* How it works */}
-        <h2 className="section-title">How It Works</h2>
-        <p className="section-subtitle">Three simple steps to discover your benefits</p>
-        <div className="g3 how-grid">
-          {[
-            [1, 'Fill Your Profile', 'Enter your age, income, state & status — takes 3 minutes'],
-            [2, 'Run Eligibility Check', 'Our rule engine matches you against 30+ schemes instantly'],
-            [3, 'View & Apply', 'See eligible schemes, missing docs, and official apply links'],
-          ].map(([n, title, desc]) => (
-            <div key={n} className="card how-card">
-              <div className="how-number">{n}</div>
-              <h3 className="how-title">{title}</h3>
-              <p className="how-desc">{desc}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Testimonials */}
-        <h2 className="section-title">What People Say</h2>
-        <p className="section-subtitle">Real stories from SchemeTracker users</p>
-        <div className="g3 testimonial-grid">
-          {[
-            ['Tanish Salunke', 'Farmer, Gujarat', 'I was unaware of PM-KISAN. SchemeTracker showed me I was eligible and helped me apply. I now receive ₹6,000/year directly in my account!'],
-            ['Sunita Devi', 'Student, Bihar', 'Found 3 scholarships I qualify for. The document checklist was so helpful — I knew exactly what to arrange before applying.'],
-            ['Mohammed Ali', 'Small Business Owner', 'Got the Mudra loan details instantly. The eligibility score showed me exactly what I was missing. Applied within a week!'],
-          ].map(([name, role, text]) => (
-            <div key={name} className="card">
-              <div className="testimonial-stars">★★★★★</div>
-              <p className="testimonial-text">"{text}"</p>
-              <div className="testimonial-name">{name}</div>
-              <div className="testimonial-role">{role}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* CTA Banner */}
+        {/* ── CTA BANNER ── */}
         <div className="cta-banner">
-          <h2 className="cta-title">Start Checking Your Eligibility Now</h2>
-          <p className="cta-subtitle">It's free, private, and takes less than 3 minutes</p>
+          <h2 className="cta-title">Don't Miss Schemes You Deserve</h2>
+          <p className="cta-subtitle">Join thousands of Indians who discovered their government benefits using SchemeTracker. It's free, instant, and private.</p>
           <button className="btn btn-lg cta-btn" onClick={() => navigate('checker')}>
-            <span className="cta-btn-label">Get Started Free</span>
+            <span className="cta-btn-label">Check Your Eligibility Now</span>
             <span className="cta-btn-hover">
-              <span>Get Started Free</span>
+              <span>Check Your Eligibility Now</span>
               <span className="cta-btn-arrow">→</span>
             </span>
             <span className="cta-btn-dot"></span>
           </button>
         </div>
 
-        {/* Footer */}
-        <div className="home-footer">
-          <div className="home-footer-brand">SchemeTracker</div>
-          <p>*For demonstration purposes only. Always verify eligibility from official government portals. Not affiliated with any government body.</p>
-        </div>
+        {/* ── FOOTER ── */}
+        <footer className="home-footer2">
+          <div className="footer-top">
+            <div className="footer-brand-col">
+              <div className="footer-brand">Scheme<span>Tracker</span></div>
+              <p className="footer-brand-desc">Helping every Indian citizen discover and claim the government benefits they deserve.</p>
+            </div>
+            <div className="footer-links-col">
+              <div className="footer-col-title">Product</div>
+              <a className="footer-link" href="#">Features</a>
+              <a className="footer-link" href="#">How It Works</a>
+              <a className="footer-link" href="#">Schemes</a>
+              <a className="footer-link" href="#">Pricing</a>
+            </div>
+            <div className="footer-links-col">
+              <div className="footer-col-title">Support</div>
+              <a className="footer-link" href="#">Help Center</a>
+              <a className="footer-link" href="#">Contact Us</a>
+              <a className="footer-link" href="#">Privacy Policy</a>
+              <a className="footer-link" href="#">Terms of Service</a>
+            </div>
+            <div className="footer-links-col">
+              <div className="footer-col-title">Resources</div>
+              <a className="footer-link" href="#">Blog</a>
+              <a className="footer-link" href="#">Documentation</a>
+              <a className="footer-link" href="#">Government Links</a>
+              <a className="footer-link" href="#">FAQ</a>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <span>© 2024 SchemeTracker. All rights reserved.</span>
+            <span className="footer-disclaimer">*For demonstration purposes only. Not affiliated with any government body. Always verify from official portals.</span>
+          </div>
+        </footer>
+
       </div>
     </div>
   );
