@@ -6,25 +6,25 @@ import FloatingLines from '../components/FloatingLines';
 
 const TESTIMONIALS = [
   { color: 'green', quote: 'I had no idea I was eligible for 5 schemes until SchemeTracker matched my profile. Applied for PM Kisan within minutes!', name: 'Rajesh Kumar', role: 'Farmer, Bihar' },
-  { color: 'dark',  quote: 'The missing documents feature saved me weeks of running around. Everything was listed clearly with what I needed to do.', name: 'Priya Sharma', role: 'Small Business Owner, Maharashtra' },
-  { color: 'dark',  quote: 'As a student from a rural area, I found scholarship schemes I never knew existed. This tool should be used by everyone.', name: 'Amit Patel', role: 'Student, Gujarat' },
+  { color: 'dark', quote: 'The missing documents feature saved me weeks of running around. Everything was listed clearly with what I needed to do.', name: 'Priya Sharma', role: 'Small Business Owner, Maharashtra' },
+  { color: 'dark', quote: 'As a student from a rural area, I found scholarship schemes I never knew existed. This tool should be used by everyone.', name: 'Amit Patel', role: 'Student, Gujarat' },
   { color: 'green', quote: 'Got the Mudra loan scheme details instantly. The eligibility score showed exactly what I was missing. Applied within a week!', name: 'Mohammed Ali', role: 'Small Business Owner, UP' },
 ];
 
 const FEATURES = [
-  { tag: 'CORE',       title: 'Smart Eligibility Engine',        desc: 'AI-powered matching analyzes your profile against complex eligibility criteria across all schemes simultaneously.' },
-  { tag: 'SMART',      title: 'Missing Documents Detection',      desc: 'Instantly identify which documents you need to complete your application — no guesswork.' },
-  { tag: 'AI',         title: 'Personalized Recommendations',     desc: 'Get scheme suggestions ranked by relevance to your unique profile and circumstances.' },
-  { tag: 'TRACK',      title: 'Deadlines & Benefits',             desc: 'Track application deadlines and understand exact benefits for each scheme you qualify for.' },
-  { tag: 'ORGANIZER',  title: 'Bookmark & Track',                 desc: 'Save schemes of interest and track your application progress in one dashboard.' },
-  { tag: 'ADMIN',      title: 'Admin Management',                 desc: 'Comprehensive admin tools for managing schemes, categories, and user analytics.' },
+  { tag: 'CORE', title: 'Smart Eligibility Engine', desc: 'AI-powered matching analyzes your profile against complex eligibility criteria across all schemes simultaneously.' },
+  { tag: 'SMART', title: 'Missing Documents Detection', desc: 'Instantly identify which documents you need to complete your application — no guesswork.' },
+  { tag: 'AI', title: 'Personalized Recommendations', desc: 'Get scheme suggestions ranked by relevance to your unique profile and circumstances.' },
+  { tag: 'TRACK', title: 'Deadlines & Benefits', desc: 'Track application deadlines and understand exact benefits for each scheme you qualify for.' },
+  { tag: 'ORGANIZER', title: 'Bookmark & Track', desc: 'Save schemes of interest and track your application progress in one dashboard.' },
+  { tag: 'ADMIN', title: 'Admin Management', desc: 'Comprehensive admin tools for managing schemes, categories, and user analytics.' },
 ];
 
 const SCHEMES = [
   { cat: 'AGRICULTURE', name: 'PM Kisan Samman Nidhi', benefit: '₹6,000/year', tags: ['Farmer', 'Land Owner'], status: 'eligible' },
-  { cat: 'HEALTHCARE',  name: 'Ayushman Bharat',       benefit: '₹5L Coverage', tags: ['Below Poverty Line', 'Health'], status: 'eligible' },
-  { cat: 'HOUSING',     name: 'PM Awas Yojana',        benefit: '₹2.67L Subsidy', tags: ['Urban', 'Low Income'], status: 'docs' },
-  { cat: 'BUSINESS',    name: 'Mudra Loan Scheme',     benefit: 'Up to ₹10L Loan', tags: ['Entrepreneur', 'MSME'], status: 'eligible' },
+  { cat: 'HEALTHCARE', name: 'Ayushman Bharat', benefit: '₹5L Coverage', tags: ['Below Poverty Line', 'Health'], status: 'eligible' },
+  { cat: 'HOUSING', name: 'PM Awas Yojana', benefit: '₹2.67L Subsidy', tags: ['Urban', 'Low Income'], status: 'docs' },
+  { cat: 'BUSINESS', name: 'Mudra Loan Scheme', benefit: 'Up to ₹10L Loan', tags: ['Entrepreneur', 'MSME'], status: 'eligible' },
 ];
 
 const FAQ_ITEMS = [
@@ -75,7 +75,7 @@ export default function Home({ navigate, setFilter }) {
               Find Every
               <br />
               <span className="hero2-title-blue">Government Scheme</span>
-              <br />
+
               You Deserve
             </h1>
             <p className="hero2-subtitle">
@@ -92,9 +92,12 @@ export default function Home({ navigate, setFilter }) {
               </button>
             </div>
             <div className="hero2-trust">
-              <span>✓ 100% Free</span>
-              <span>👥 10k+ Users</span>
-              <span>⚡ Instant Results</span>
+              <span>
+                <div className="mockup-floating mockup-f1">100% Free</div></span>
+              <span>
+                <div className="mockup-floating mockup-f2">10k+ Users</div></span>
+              <span>
+                <div className="mockup-floating mockup-f3">Instant Results</div></span>
             </div>
           </div>
 
@@ -107,9 +110,6 @@ export default function Home({ navigate, setFilter }) {
                 <span className="mockup-title">SchemeTracker Dashboard</span>
               </div>
               <div className="mockup-body">
-                <div className="mockup-floating mockup-f1">PM Kisan ✓</div>
-                <div className="mockup-floating mockup-f2">Ayushman Bharat</div>
-
                 {[
                   { name: 'PM Kisan Samman Nidhi', sub: '₹6,000/year • Agriculture', badge: 'Eligible', badgeClass: 'badge-green' },
                   { name: 'Ayushman Bharat', sub: '₹5L Coverage • Health', badge: 'Eligible', badgeClass: 'badge-blue' },
@@ -185,14 +185,13 @@ export default function Home({ navigate, setFilter }) {
         <div className="how-timeline">
           <div className="how-timeline-line"></div>
           {[
-            { icon: '👤', title: 'Create Your Profile', desc: 'Share basic details like age, income, occupation, and location.' },
-            { icon: '🔍', title: 'Check Eligibility', desc: 'Our engine scans 30+ schemes and matches them to your profile instantly.' },
-            { icon: '☑️', title: 'Get Personalized Schemes', desc: 'See which schemes you qualify for with benefits, deadlines, and requirements.' },
-            { icon: '📋', title: 'Complete Documents', desc: 'Know exactly which documents are missing and how to get them.' },
+            { title: 'Create Your Profile', desc: 'Share basic details like age, income, occupation, and location.' },
+            { title: 'Check Eligibility', desc: 'Our engine scans 30+ schemes and matches them to your profile instantly.' },
+            { title: 'Get Personalized Schemes', desc: 'See which schemes you qualify for with benefits, deadlines, and requirements.' },
+            { title: 'Complete Documents', desc: 'Know exactly which documents are missing and how to get them.' },
           ].map((step, i) => (
             <div key={i} className={`how-step ${i % 2 === 0 ? 'how-step-left' : 'how-step-right'}`}>
               <div className="how-step-card">
-                <div className="how-step-icon">{step.icon}</div>
                 <h3 className="how-step-title">{step.title}</h3>
                 <p className="how-step-desc">{step.desc}</p>
               </div>
@@ -211,7 +210,6 @@ export default function Home({ navigate, setFilter }) {
             <div key={f.title} className={`feature-item ${i % 2 === 0 ? 'feature-item-left' : 'feature-item-right'}`}>
               <div className="feature-card">
                 <div className="feature-tag-row">
-                  <span className="feature-icon-box">{f.icon}</span>
                   <span className="feature-tag">{f.tag}</span>
                 </div>
                 <h3 className="feature-title">{f.title}</h3>
