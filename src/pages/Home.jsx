@@ -12,12 +12,12 @@ const TESTIMONIALS = [
 ];
 
 const FEATURES = [
-  { tag: 'CORE', title: 'Smart Eligibility Engine', desc: 'AI-powered matching analyzes your profile against complex eligibility criteria across all schemes simultaneously.' },
-  { tag: 'SMART', title: 'Missing Documents Detection', desc: 'Instantly identify which documents you need to complete your application — no guesswork.' },
-  { tag: 'AI', title: 'Personalized Recommendations', desc: 'Get scheme suggestions ranked by relevance to your unique profile and circumstances.' },
-  { tag: 'TRACK', title: 'Deadlines & Benefits', desc: 'Track application deadlines and understand exact benefits for each scheme you qualify for.' },
-  { tag: 'ORGANIZER', title: 'Bookmark & Track', desc: 'Save schemes of interest and track your application progress in one dashboard.' },
-  { tag: 'ADMIN', title: 'Admin Management', desc: 'Comprehensive admin tools for managing schemes, categories, and user analytics.' },
+  { image: '', tag: 'CORE', title: 'Smart Eligibility Engine', desc: 'AI-powered matching analyzes your profile against complex eligibility criteria across all schemes simultaneously.' },
+  { image: '', tag: 'SMART', title: 'Missing Documents Detection', desc: 'Instantly identify which documents you need to complete your application — no guesswork.' },
+  { image: '', tag: 'AI', title: 'Personalized Recommendations', desc: 'Get scheme suggestions ranked by relevance to your unique profile and circumstances.' },
+  { image: '', tag: 'TRACK', title: 'Deadlines & Benefits', desc: 'Track application deadlines and understand exact benefits for each scheme you qualify for.' },
+  { image: '', tag: 'ORGANIZER', title: 'Bookmark & Track', desc: 'Save schemes of interest and track your application progress in one dashboard.' },
+  { image: '', tag: 'ADMIN', title: 'Admin Management', desc: 'Comprehensive admin tools for managing schemes, categories, and user analytics.' },
 ];
 
 const SCHEMES = [
@@ -210,13 +210,14 @@ export default function Home({ navigate, setFilter }) {
             <div key={f.title} className={`feature-item ${i % 2 === 0 ? 'feature-item-left' : 'feature-item-right'}`}>
               <div className="feature-card">
                 <div className="feature-tag-row">
+
                   <span className="feature-tag">{f.tag}</span>
                 </div>
                 <h3 className="feature-title">{f.title}</h3>
                 <p className="feature-desc">{f.desc}</p>
               </div>
               <div className="feature-visual">
-                <span className="feature-visual-icon">{f.icon}</span>
+                <img src={f.image} alt={f.title} className="feature-visual-img" />
               </div>
             </div>
           ))}
