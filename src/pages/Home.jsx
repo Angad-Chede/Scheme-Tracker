@@ -72,11 +72,11 @@ export default function Home({ navigate, setFilter }) {
           <div className="hero2-left">
             <span className="hero2-badge">✦ Smart Government Scheme Discovery</span>
             <h1 className="hero2-title">
-              Find Every
+              Discover Every
               <br />
-              <span className="hero2-title-blue">Government Scheme</span>
-
-              You Deserve
+              <span className="hero2-title-gradient">Government Scheme</span>
+              <br />
+              You're Entitled To
             </h1>
             <p className="hero2-subtitle">
               Stop missing benefits you qualify for. SchemeTracker intelligently
