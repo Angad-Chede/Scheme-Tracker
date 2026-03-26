@@ -206,16 +206,16 @@
 }
 
 .scheme-row-container {
-  background: rgba(17, 24, 39, 0.4);
+  background: linear-gradient(360deg, rgba(172, 25, 160, 0.47) 30%, rgba(80, 24, 76, 0.301) 50%,rgba(19, 9, 20, 0.1) 100%);
   border-radius: 12px;
-  border: 1px solid var(--border);
+  border: #030712;
   overflow: hidden;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .scheme-row-container:hover {
   border-color: var(--blue);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 20px rgba(52, 49, 49, 0.907);
 }
 
 .scheme-row {
