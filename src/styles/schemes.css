@@ -206,7 +206,7 @@
 }
 
 .scheme-row-container {
-  background: linear-gradient(360deg, rgba(172, 25, 160, 0.47) 30%, rgba(80, 24, 76, 0.301) 50%,rgba(19, 9, 20, 0.1) 100%);
+  background: linear-gradient(360deg, rgba(172, 25, 160, 0.47) 5%, rgba(80, 24, 76, 0.301) 50%,rgba(19, 9, 20, 0.1) 100%);
   border-radius: 12px;
   border: #030712;
   overflow: hidden;
