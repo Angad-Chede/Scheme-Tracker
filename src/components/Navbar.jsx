@@ -30,12 +30,12 @@ export default function Navbar({ page, user, navigate, onSignOut }) {
         {user ? (
           <>
             <span className="nav-user-greeting">Hi, {user.name.split(' ')[0]}</span>
-            <button className="btn btn-ghost btn-sm" onClick={onSignOut}><span>↩ Sign out</span></button>
+            <button className="btn-crazy-ghost" onClick={onSignOut}><span>↩ Sign out</span></button>
           </>
         ) : (
           <>
-            <button className="btn btn-ghost btn-sm" onClick={() => navigate('login')}><span>Sign in</span></button>
-            <button className="btn btn-primary btn-sm" onClick={() => navigate('signup')}>Sign up</button>
+            <button className="btn-crazy-ghost" onClick={() => navigate('login')}><span>Sign in</span></button>
+            <button className="btn-crazy-primary" onClick={() => navigate('signup')}>Sign up</button>
           </>
         )}
       </div>
