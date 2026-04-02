@@ -17,7 +17,7 @@
   font-size: 26px;
   font-weight: 800;
   margin-bottom: 4px;
-  color: #fff;
+  color: var(--blue-dark);
 }
 
 .dashboard-meta {
@@ -39,7 +39,7 @@
   font-weight: 800;
   color: #fff;
   margin-bottom: 10px;
-  box-shadow: 0 0 15px rgba(47, 75, 162, 0.3);
+  box-shadow: 0 4px 12px var(--blue-pale);
 }
 
 .sidebar-user-name {
@@ -67,8 +67,8 @@
 /* Profile completion banner */
 .profile-completion-card {
   margin-bottom: 20px;
-  background: rgba(47, 75, 162, 0.1);
-  border-color: rgba(47, 75, 162, 0.3);
+  background: var(--blue-pale);
+  border-color: var(--blue);
 }
 
 .profile-completion-header {
@@ -113,8 +113,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 14px;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: #FFFFFF;
+  border: 1px solid var(--border);
   border-radius: 10px;
 }
 
@@ -150,7 +150,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 14px;
-  background: var(--gray-pale);
+  background: var(--bg);
+  border: 1px solid var(--border);
   border-radius: 10px;
 }
 
@@ -177,10 +178,10 @@
 
 /* AI Assistant card */
 .ai-card {
-  background: linear-gradient(135deg, var(--blue), var(--pink));
+  background: linear-gradient(135deg, var(--blue), var(--light-blue));
   color: #fff;
   border: none;
-  box-shadow: 0 10px 30px rgba(233, 71, 245, 0.3);
+  box-shadow: 0 10px 30px var(--blue-pale);
   position: relative;
   overflow: hidden;
 }
@@ -223,7 +224,7 @@
 
 /* Empty prompt */
 .dashboard-empty-prompt {
-  background: var(--white);
+  background: #FFFFFF;
   border-radius: 14px;
   border: 1px solid var(--border);
   padding: 40px;
