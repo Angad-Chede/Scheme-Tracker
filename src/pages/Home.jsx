@@ -229,24 +229,43 @@ export default function Home({ navigate, setFilter }) {
           Discover Schemes <span className="text-blue">Tailored for You</span>
         </h2>
         <p className="section-subtitle">Browse featured government schemes with instant eligibility indicators.</p>
-        <div className="schemes-preview-grid">
-          {SCHEMES.map(s => (
-            <div key={s.name} className="scheme-preview-card">
-              <div className="scheme-preview-cat">{s.cat}</div>
-              <h3 className="scheme-preview-name">{s.name}</h3>
-              <div className="scheme-preview-benefit">{s.benefit}</div>
-              <div className="scheme-preview-tags">
-                {s.tags.map(t => (
-                  <span key={t} className="scheme-tag">
-                    {t}
-                  </span>
+        <div className="home-table-wrapper">
+          <div className="home-table-gradient"></div>
+          <div className="home-table-container">
+            <table className="home-scheme-table">
+              <thead>
+                <tr>
+                  <th>Scheme Name</th>
+                  <th>Category</th>
+                  <th>Key Benefits</th>
+                  <th>Your Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {SCHEMES.map(s => (
+                  <tr key={s.name} onClick={() => navigate('schemes')}>
+                    <td className="st-name-cell">
+                      <strong>{s.name}</strong>
+                      <div className="st-tags">
+                        {s.tags.map(t => <span key={t} className="st-tag">{t}</span>)}
+                      </div>
+                    </td>
+                    <td className="st-cat-cell">{s.cat}</td>
+                    <td className="st-benefit-cell">{s.benefit}</td>
+                    <td className="st-status-cell">
+                      <span className={`st-badge ${s.status === 'docs' ? 'st-badge-warn' : 'st-badge-success'}`}>
+                        {s.status === 'docs' ? '⚠ Action Needed' : '✓ Eligible'}
+                      </span>
+                    </td>
+                    <td className="st-action-cell">
+                      <button className="btn btn-ghost btn-sm st-view-btn">View →</button>
+                    </td>
+                  </tr>
                 ))}
-              </div>
-              <div className={`scheme-preview-status ${s.status === 'docs' ? 'status-docs' : 'status-eligible'}`}>
-                {s.status === 'docs' ? '⚠ Documents Missing' : '✓ Eligible'}
-              </div>
-            </div>
-          ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
