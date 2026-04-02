@@ -2,8 +2,7 @@
    GLOBAL RESET & BASE
    ============================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -12,36 +11,45 @@
 }
 
 :root {
-  --blue: #2F4BA2;
-  --pink: #E947F5;
-  --blue-dark: #1e3a5f;
-  --blue-pale: rgba(47, 75, 162, 0.15);
-  --pink-pale: rgba(233, 71, 245, 0.15);
+  /* Government Brand Colors */
+  --yellow: #FFDE42;
+  --light-blue: #53CBF3;
+  --blue: #5478FF;
+  --blue-dark: #111FA2;
+
+  /* Pale variants for backgrounds */
+  --blue-pale: rgba(84, 120, 255, 0.15);
+  --yellow-pale: rgba(255, 222, 66, 0.2);
+  --light-blue-pale: rgba(83, 203, 243, 0.15);
+
   --green: #10b981;
   --green-pale: rgba(16, 185, 129, 0.1);
   --amber: #f59e0b;
   --amber-pale: rgba(245, 158, 11, 0.1);
   --red: #ef4444;
   --red-pale: rgba(239, 68, 68, 0.1);
-  --gray: #94a3b8;
-  --gray-pale: rgba(148, 163, 184, 0.1);
-  --border: rgba(255, 255, 255, 0.1);
-  --border2: rgba(255, 255, 255, 0.2);
-  --bg: #030712;
-  --card-bg: rgba(17, 24, 39, 0.7);
-  --white: #111827;
-  --text: #FFFFFF;
-  --text2: #CBD5E1;
-  --text3: #94A3B8;
-  --radius: 14px;
+  --gray: #64748B;
+  --gray-pale: rgba(100, 116, 139, 0.1);
+  
+  /* Light Theme Base Colors */
+  --border: #E2E8F0;
+  --border2: #CBD5E1;
+  --bg: #F8FAFC;
+  --card-bg: #FFFFFF;
+  --white: #FFFFFF;
+  --text: #0F172A;
+  --text2: #334155;
+  --text3: #64748B;
+  
+  --radius: 12px;
   --radius-sm: 8px;
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.1);
 
-  /* ── Typography tokens ── */
-  --font-display:  'Raleway', sans-serif;
-  --font-heading:  'Bona Nova SC', serif;
-  --font-body:     'Raleway', sans-serif;
+  /* Typography tokens */
+  --font-display:  'Inter', sans-serif;
+  --font-heading:  'Inter', sans-serif;
+  --font-body:     'Inter', sans-serif;
 }
 
 body {
@@ -52,19 +60,20 @@ body {
   min-height: 100vh;
 }
 
-/* Bodoni Moda — grand display titles (hero, CTA) */
+/* Inter — clean display titles (hero, CTA) */
 h1 {
   font-family: var(--font-display);
-  font-optical-sizing: auto;
   font-weight: 800;
   line-height: 1.15;
+  color: var(--blue-dark);
 }
 
-/* Lobster Two — warm section / card headings */
+/* Inter — warm section / card headings */
 h2, h3, h4 {
   font-family: var(--font-heading);
   font-weight: 700;
   line-height: 1.25;
+  color: var(--blue-dark);
 }
 
 button {
@@ -103,29 +112,29 @@ a {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--pink), var(--blue));
+  background: linear-gradient(135deg, var(--blue), var(--light-blue));
   color: #fff;
-  box-shadow: 0 4px 15px rgba(233, 71, 245, 0.3);
+  box-shadow: 0 4px 15px rgba(84, 120, 255, 0.3);
   border: none;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(233, 71, 245, 0.5);
-  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(84, 120, 255, 0.4);
+  filter: brightness(1.05);
 }
 
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--text);
+  background: transparent;
+  color: var(--blue-dark);
   border: 1px solid var(--border);
   backdrop-filter: blur(4px);
 }
 
 .btn-ghost:hover {
-  background: rgba(233, 71, 245, 0.08);
-  border-color: var(--pink);
-  color: #fff;
+  background: var(--blue-pale);
+  border-color: var(--blue);
+  color: var(--blue-dark);
 }
 
 .btn-sm {
@@ -173,15 +182,15 @@ a {
   border: 1.5px solid var(--border);
   border-radius: 10px;
   font-size: 14px;
-  background: rgba(255, 255, 255, 0.03);
+  background: #FFFFFF;
   color: var(--text);
   transition: all 0.2s;
 }
 
 .inp:focus {
   border-color: var(--blue);
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 10px rgba(47, 75, 162, 0.3);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px var(--blue-pale);
 }
 
 .lbl {
@@ -259,28 +268,26 @@ a {
   border: 1.5px solid var(--border);
   cursor: pointer;
   transition: all 0.2s;
-  background: rgba(255, 255, 255, 0.03);
+  background: #FFFFFF;
   color: var(--text2);
   font-family: inherit;
 }
 
 .chip:hover,
 .chip.on {
-  border-color: var(--pink);
-  background: rgba(233, 71, 245, 0.1);
-  color: #fff;
-  box-shadow: 0 0 15px rgba(233, 71, 245, 0.2);
+  border-color: var(--blue);
+  background: var(--blue-pale);
+  color: var(--blue-dark);
 }
 
 /* Sidebar */
 .sidebar {
   width: 240px;
   flex-shrink: 0;
-  background: rgba(17, 24, 39, 0.3);
+  background: var(--card-bg);
   border-right: 1px solid var(--border);
   min-height: calc(100vh - 64px);
   padding: 20px 12px;
-  backdrop-filter: blur(10px);
 }
 
 .si {
@@ -308,6 +315,7 @@ a {
   cursor: pointer;
   position: relative;
   transition: background 0.2s;
+  background: var(--gray-pale);
 }
 
 .toggle-knob {
@@ -354,4 +362,4 @@ hr {
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 th { padding: 10px 12px; text-align: left; font-weight: 600; color: var(--text2); border-bottom: 2px solid var(--border); white-space: nowrap; }
 td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; color: var(--text); }
-tr:hover td { background: rgba(255,255,255,0.05); }
+tr:hover td { background: var(--gray-pale); }
