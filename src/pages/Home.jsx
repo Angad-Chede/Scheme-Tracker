@@ -2,7 +2,7 @@ import { useState } from 'react';
 import '../styles/home.css';
 import CountUp from '../components/CountUp';
 import { CATS } from '../data';
-import FloatingLines from '../components/FloatingLines';
+import { StripeGradientShader } from '../components/ui/stripe-like-gradient-shader';
 
 const TESTIMONIALS = [
   { color: 'green', quote: 'I had no idea I was eligible for 5 schemes until SchemeTracker matched my profile. Applied for PM Kisan within minutes!', name: 'Rajesh Kumar', role: 'Farmer, Bihar' },
@@ -45,8 +45,8 @@ export default function Home({ navigate, setFilter }) {
 
   return (
     <div className="home-root">
-      {/* ── HERO ── */}
-      <section className="hero2" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* ── SHADER BACKGROUND WRAPPER (Hero + Stats + Categories) ── */}
+      <div style={{ position: 'relative', overflow: 'hidden' }}>
         <div
           style={{
             position: 'absolute',
@@ -57,124 +57,121 @@ export default function Home({ navigate, setFilter }) {
             pointerEvents: 'none',
           }}
         >
-          <FloatingLines
-            enabledWaves={['top', 'middle', 'bottom']}
-            lineCount={5}
-            lineDistance={5}
-            bendRadius={5}
-            bendStrength={-0.5}
-            interactive={true}
-            parallax={true}
-          />
+          <StripeGradientShader className="!h-full" />
         </div>
 
-        <div className="hero2-inner" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="hero2-left">
-            <span className="hero2-badge">✦ Smart Government Scheme Discovery</span>
-            <h1 className="hero2-title">
-              Discover Every
-              <br />
-              <span className="hero2-title-gradient">Government Scheme</span>
-              <br />
-              You're Entitled To
-            </h1>
-            <p className="hero2-subtitle">
-              Stop missing benefits you qualify for. SchemeTracker intelligently
-              matches your profile against 30+ government schemes and tells you
-              exactly what you're eligible for — in seconds.
-            </p>
-            <div className="hero2-actions">
-              <button className="btn hero2-btn-primary" onClick={() => navigate('checker')}>
-                Check Eligibility →
-              </button>
-              <button className="btn hero2-btn-outline" onClick={() => navigate('schemes')}>
-                Explore Schemes
-              </button>
-            </div>
-            <div className="hero2-trust">
-              <span>
-                <div className="mockup-floating mockup-f1">100% Free</div></span>
-              <span>
-                <div className="mockup-floating mockup-f2">10k+ Users</div></span>
-              <span>
-                <div className="mockup-floating mockup-f3">Instant Results</div></span>
-            </div>
-          </div>
-
-          <div className="hero2-right">
-            <div className="hero2-mockup">
-              <div className="mockup-bar">
-                <span className="mockup-dot red"></span>
-                <span className="mockup-dot yellow"></span>
-                <span className="mockup-dot green"></span>
-                <span className="mockup-title">SchemeTracker Dashboard</span>
+        {/* ── HERO ── */}
+        <section className="hero2" style={{ position: 'relative', zIndex: 1 }}>
+          <div className="hero2-inner" style={{ position: 'relative', zIndex: 1 }}>
+            <div className="hero2-left">
+              <span className="hero2-badge">✦ Smart Government Scheme Discovery</span>
+              <h1 className="hero2-title">
+                Discover Every
+                <br />
+                <span className="hero2-title-gradient">Government Scheme</span>
+                <br />
+                You're Entitled To
+              </h1>
+              <p className="hero2-subtitle">
+                Stop missing benefits you qualify for. SchemeTracker intelligently
+                matches your profile against 30+ government schemes and tells you
+                exactly what you're eligible for — in seconds.
+              </p>
+              <div className="hero2-actions">
+                <button className="btn hero2-btn-primary" onClick={() => navigate('checker')}>
+                  Check Eligibility →
+                </button>
+                <button className="btn hero2-btn-outline" onClick={() => navigate('schemes')}>
+                  Explore Schemes
+                </button>
               </div>
-              <div className="mockup-body">
-                {[
-                  { name: 'PM Kisan Samman Nidhi', sub: '₹6,000/year • Agriculture', badge: 'Eligible', badgeClass: 'badge-green' },
-                  { name: 'Ayushman Bharat', sub: '₹5L Coverage • Health', badge: 'Eligible', badgeClass: 'badge-blue' },
-                  { name: 'PM Awas Yojana', sub: 'Housing Subsidy • Urban', badge: '95% Match', badgeClass: 'badge-amber' },
-                ].map(s => (
-                  <div key={s.name} className="mockup-row">
-                    <div>
-                      <div className="mockup-row-name">{s.name}</div>
-                      <div className="mockup-row-sub">{s.sub}</div>
-                    </div>
-                    <span className={`mockup-badge ${s.badgeClass}`}>{s.badge}</span>
-                  </div>
-                ))}
+              <div className="hero2-trust">
+                <span>
+                  <div className="mockup-floating mockup-f1">100% Free</div></span>
+                <span>
+                  <div className="mockup-floating mockup-f2">10k+ Users</div></span>
+                <span>
+                  <div className="mockup-floating mockup-f3">Instant Results</div></span>
+              </div>
+            </div>
 
-                <div className="mockup-progress-row">
-                  <div className="mockup-progress-bar">
-                    <div className="mockup-progress-fill"></div>
+            <div className="hero2-right">
+              <div className="hero2-mockup">
+                <div className="mockup-bar">
+                  <span className="mockup-dot red"></span>
+                  <span className="mockup-dot yellow"></span>
+                  <span className="mockup-dot green"></span>
+                  <span className="mockup-title">SchemeTracker Dashboard</span>
+                </div>
+                <div className="mockup-body">
+                  {[
+                    { name: 'PM Kisan Samman Nidhi', sub: '₹6,000/year • Agriculture', badge: 'Eligible', badgeClass: 'badge-green' },
+                    { name: 'Ayushman Bharat', sub: '₹5L Coverage • Health', badge: 'Eligible', badgeClass: 'badge-blue' },
+                    { name: 'PM Awas Yojana', sub: 'Housing Subsidy • Urban', badge: '95% Match', badgeClass: 'badge-amber' },
+                  ].map(s => (
+                    <div key={s.name} className="mockup-row">
+                      <div>
+                        <div className="mockup-row-name">{s.name}</div>
+                        <div className="mockup-row-sub">{s.sub}</div>
+                      </div>
+                      <span className={`mockup-badge ${s.badgeClass}`}>{s.badge}</span>
+                    </div>
+                  ))}
+
+                  <div className="mockup-progress-row">
+                    <div className="mockup-progress-bar">
+                      <div className="mockup-progress-fill"></div>
+                    </div>
+                    <span className="mockup-progress-label">75%</span>
                   </div>
-                  <span className="mockup-progress-label">75%</span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── STATS STRIP ── */}
-      <section className="stats-strip">
-        {[
-          { num: 30, suffix: '+', label: 'Schemes Tracked' },
-          { num: 10, suffix: 'k+', label: 'Eligibility Checks' },
-          { num: 95, suffix: '%', label: 'Faster Discovery' },
-          { num: 12, suffix: '+', label: 'Beneficiary Categories' },
-        ].map(s => (
-          <div key={s.label} className="stat-item">
-            <div className="stat-num">
-              <CountUp from={0} to={s.num} duration={2} />
-              {s.suffix}
-            </div>
-            <div className="stat-label">{s.label.toUpperCase()}</div>
-          </div>
-        ))}
-      </section>
-
-      <div className="home-container">
-        {/* ── CATEGORIES ── */}
-        <div className="section-label">CATEGORIES</div>
-        <h2 className="section-title">Schemes for Every Indian</h2>
-        <p className="section-subtitle">From farmers to students, women to senior citizens</p>
-        <div className="cat-grid">
-          {CATS.map(cat => (
-            <div
-              key={cat}
-              className="cat-card"
-              onClick={() => {
-                setFilter(cat);
-                navigate('schemes');
-              }}
-            >
-              <span className="cat-name">{cat}</span>
-              <span className="cat-arrow">→</span>
+        {/* ── STATS STRIP ── */}
+        <section className="stats-strip" style={{ position: 'relative', zIndex: 1 }}>
+          {[
+            { num: 30, suffix: '+', label: 'Schemes Tracked' },
+            { num: 10, suffix: 'k+', label: 'Eligibility Checks' },
+            { num: 95, suffix: '%', label: 'Faster Discovery' },
+            { num: 12, suffix: '+', label: 'Beneficiary Categories' },
+          ].map(s => (
+            <div key={s.label} className="stat-item">
+              <div className="stat-num">
+                <CountUp from={0} to={s.num} duration={2} />
+                {s.suffix}
+              </div>
+              <div className="stat-label">{s.label.toUpperCase()}</div>
             </div>
           ))}
-        </div>
+        </section>
 
+        {/* ── CATEGORIES ── */}
+        <div className="home-container" style={{ position: 'relative', zIndex: 1, paddingBottom: '60px' }}>
+          <div className="section-label">CATEGORIES</div>
+          <h2 className="section-title">Schemes for Every Indian</h2>
+          <p className="section-subtitle">From farmers to students, women to senior citizens</p>
+          <div className="cat-grid">
+            {CATS.map(cat => (
+              <div
+                key={cat}
+                className="cat-card"
+                onClick={() => {
+                  setFilter(cat);
+                  navigate('schemes');
+                }}
+              >
+                <span className="cat-name">{cat}</span>
+                <span className="cat-arrow">→</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="home-container">
         {/* ── HOW IT WORKS ── */}
         <div className="section-label">PROCESS</div>
         <h2 className="section-title">
