@@ -1,8 +1,51 @@
 import { useState, useEffect } from 'react';
 import '../styles/home.css';
 import CountUp from '../components/CountUp';
-import { CATS } from '../data';
+import { CATS, CAT_EMOJI } from '../data';
 import { StripeGradientShader } from '../components/ui/stripe-like-gradient-shader';
+
+import imgAgri from '../assets/1Agri.png';
+import imgHealth from '../assets/2health.png';
+import imgHouse from '../assets/3house.png';
+import imgEmploy from '../assets/4employ.png';
+import imgEdu from '../assets/5edu.png';
+import imgWomen from '../assets/6women.png';
+import imgMsme from '../assets/7msme.png';
+import imgDisable from '../assets/8disable.png';
+import imgPension from '../assets/9pension.png';
+import imgWelfare from '../assets/10welfare.png';
+import imgInsurance from '../assets/11insurance.png';
+import imgFinance from '../assets/12finance.png';
+
+const CATEGORY_IMAGES = {
+  'Agriculture': imgAgri,
+  'Healthcare': imgHealth,
+  'Housing': imgHouse,
+  'Employment': imgEmploy,
+  'Education': imgEdu,
+  'Women Empowerment': imgWomen,
+  'Startups / MSME': imgMsme,
+  'Disability Welfare': imgDisable,
+  'Pension': imgPension,
+  'Welfare': imgWelfare,
+  'Insurance': imgInsurance,
+  'Financial Inclusion': imgFinance,
+};
+
+const CATEGORY_INFO = {
+  'Agriculture': 'Financial support, equipment subsidies, and crop insurance for farmers.',
+  'Healthcare': 'Health insurance, free medical treatments, and wellness programs.',
+  'Housing': 'Subsidised loans and grants for building or purchasing homes.',
+  'Employment': 'Skill training, job placement, and unemployment benefits.',
+  'Education': 'Scholarships, school facilities, and higher education funds.',
+  'Women Empowerment': 'Initiatives for female entrepreneurs and girl child education.',
+  'Insurance': 'Life and accident coverage at highly subsidized premiums.',
+  'Pension': 'Monthly financial aid for senior citizens and widows.',
+  'Financial Inclusion': 'Zero-balance accounts and micro-credit facilities.',
+  'Welfare': 'Basic necessities, food subsidies, and LPG connections.',
+  'Startups / MSME': 'Seed funding, tax benefits, and mentorship for businesses.',
+  'Disability Welfare': 'Assistive devices and pensions for persons with disabilities.'
+};
 
 const FOUNDATION_TABS = [
   {
@@ -174,43 +217,50 @@ export default function Home({ navigate, setFilter }) {
 
       {/* ── STATS STRIP ── */}
       <section className="stats-strip" style={{ position: 'relative', zIndex: 10 }}>
-          {[
-            { num: 30, suffix: '+', label: 'Schemes Tracked' },
-            { num: 10, suffix: 'k+', label: 'Eligibility Checks' },
-            { num: 95, suffix: '%', label: 'Faster Discovery' },
-            { num: 12, suffix: '+', label: 'Beneficiary Categories' },
-          ].map(s => (
-            <div key={s.label} className="stat-item">
-              <div className="stat-num">
-                <CountUp from={0} to={s.num} duration={2} />
-                {s.suffix}
+        {[
+          { num: 30, suffix: '+', label: 'Schemes Tracked' },
+          { num: 10, suffix: 'k+', label: 'Eligibility Checks' },
+          { num: 95, suffix: '%', label: 'Faster Discovery' },
+          { num: 12, suffix: '+', label: 'Beneficiary Categories' },
+        ].map(s => (
+          <div key={s.label} className="stat-item">
+            <div className="stat-num">
+              <CountUp from={0} to={s.num} duration={2} />
+              {s.suffix}
+            </div>
+            <div className="stat-label">{s.label.toUpperCase()}</div>
+          </div>
+        ))}
+      </section>
+
+      {/* ── CATEGORIES GALLERY ── */}
+      <div className="home-container" style={{ paddingBottom: '60px' }}>
+        <div className="section-label">CATEGORIES</div>
+        <h2 className="section-title">Schemes for Every Indian</h2>
+        <p className="section-subtitle" style={{ marginBottom: '40px' }}>From farmers to students, women to senior citizens</p>
+        
+        <div className="cat-gallery">
+          {CATS.slice(0, 12).map((cat, idx) => (
+            <div
+              key={cat}
+              className="cat-gallery-item"
+              onClick={() => {
+                setFilter(cat);
+                navigate('schemes');
+              }}
+            >
+              <img 
+                src={CATEGORY_IMAGES[cat] || imgAgri} 
+                alt={cat} 
+                className="cat-gallery-img" 
+              />
+              <div className="cat-gallery-overlay">
+                <span className="cat-gallery-title">{cat}</span>
               </div>
-              <div className="stat-label">{s.label.toUpperCase()}</div>
             </div>
           ))}
-        </section>
-
-        {/* ── CATEGORIES ── */}
-        <div className="home-container" style={{ position: 'relative', zIndex: 1, paddingBottom: '60px' }}>
-          <div className="section-label">CATEGORIES</div>
-          <h2 className="section-title">Schemes for Every Indian</h2>
-          <p className="section-subtitle">From farmers to students, women to senior citizens</p>
-          <div className="cat-grid">
-            {CATS.map(cat => (
-              <div
-                key={cat}
-                className="cat-card"
-                onClick={() => {
-                  setFilter(cat);
-                  navigate('schemes');
-                }}
-              >
-                <span className="cat-name">{cat}</span>
-                <span className="cat-arrow">→</span>
-              </div>
-            ))}
-          </div>
         </div>
+      </div>
       <div className="home-container">
         {/* ── INTERACTIVE FOUNDATION ── */}
         <div className="foundation-wrapper" style={{ marginBottom: '80px' }}>
@@ -218,23 +268,23 @@ export default function Home({ navigate, setFilter }) {
           <h2 className="section-title" style={{ marginBottom: '40px' }}>
             Our foundation for <span className="text-blue">benefit discovery.</span>
           </h2>
-          
+
           <div className="foundation-card">
             <div className="foundation-bg"></div>
             <div className="foundation-content">
               {/* TABS */}
               <div className="foundation-tabs">
                 {FOUNDATION_TABS.map((tab, idx) => (
-                  <button 
-                    key={tab.id} 
+                  <button
+                    key={tab.id}
                     className={`foundation-tab ${foundationTab === idx ? 'active' : ''}`}
                     onClick={() => setFoundationTab(idx)}
                   >
                     {foundationTab === idx && (
                       <span className="foundation-tab-icon">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginRight: '4px' }}>
-                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                          <path d="M9 12l2 2 4-4"/>
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                          <path d="M9 12l2 2 4-4" />
                         </svg>
                       </span>
                     )}
@@ -242,11 +292,11 @@ export default function Home({ navigate, setFilter }) {
                   </button>
                 ))}
               </div>
-              
+
               <h3 className="foundation-main-title">
                 {FOUNDATION_TABS[foundationTab].title}
               </h3>
-              
+
               <div className="foundation-items">
                 {FOUNDATION_TABS[foundationTab].items.map((item, i) => (
                   <div key={i} className="foundation-item" style={{ animationDelay: `${i * 0.1}s` }}>
@@ -263,13 +313,13 @@ export default function Home({ navigate, setFilter }) {
                 ))}
               </div>
             </div>
-            
+
             <div className="foundation-visual">
-               <div className="f-globe-container">
-                 <div className="f-globe"></div>
-                 <div className="f-globe-glow"></div>
-                 <div className="f-globe-grid"></div>
-               </div>
+              <div className="f-globe-container">
+                <div className="f-globe"></div>
+                <div className="f-globe-glow"></div>
+                <div className="f-globe-grid"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -324,12 +374,12 @@ export default function Home({ navigate, setFilter }) {
         <div className="tf-bg-container">
           <div className="tf-crazy-glow"></div>
         </div>
-        
+
         <div className="tf-content">
           <div className="tf-header">
             <div className="tf-label">REAL STORIES</div>
             <h2 className="tf-title">
-              A fuller spectrum of benefits.<br/>
+              A fuller spectrum of benefits.<br />
               Powered by everyday people.
             </h2>
           </div>
@@ -364,10 +414,10 @@ export default function Home({ navigate, setFilter }) {
 
           <div className="tf-nav">
             <button className="tf-nav-btn" onClick={() => moveSlider(-1)} disabled={sliderIdx === 0}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
             </button>
             <button className="tf-nav-btn" onClick={() => moveSlider(1)} disabled={sliderIdx >= TESTIMONIALS.length - 1}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </button>
           </div>
         </div>
