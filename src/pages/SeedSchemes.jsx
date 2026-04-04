@@ -17,13 +17,13 @@ export default function SeedSchemes() {
 
       if (error) {
         console.error('Seed error:', error);
-        setMsg(`❌ Error: ${error.message}`);
+        setMsg(`Error: ${error.message}`);
       } else {
-        setMsg('✅ Schemes seeded successfully!');
+        setMsg('Schemes seeded successfully!');
       }
     } catch (err) {
       console.error('Unexpected error:', err);
-      setMsg(`❌ Unexpected error: ${err.message}`);
+      setMsg(`Unexpected error: ${err.message}`);
     } finally {
       setLoading(false);
     }
