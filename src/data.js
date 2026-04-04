@@ -31,7 +31,21 @@ export const SCHEMES = [
   {id:"pm-scholarship-ksb",title:"PM Scholarship – Paramilitary Wards",ministry:"Ministry of Home Affairs",cat:"Education",short:"Scholarship for wards of ex/serving paramilitary personnel.",desc:"Provides ₹2,500/month (boys) and ₹3,000/month (girls) to wards of ex/serving paramilitary personnel for degree/diploma programmes.",benefits:["₹2,500–₹3,000/month","2–5 year duration","For degree/diploma"],btype:"Scholarship",docs:["Aadhaar","Marksheet","Service Certificate of parent","Bank Passbook"],deadline:"Aug 31, 2024",link:"https://ksb.gov.in",rules:{studentRequired:true,maxAge:25},tags:["scholarship","paramilitary","education"],pop:60,active:true}
 ];
 
-export const CATS = [...new Set(SCHEMES.map(s => s.cat))];
+export const CATS = [
+  'Agriculture',
+  'Healthcare',
+  'Housing',
+  'Employment',
+  'Education',
+  'Women Empowerment',
+  'Startups / MSME',
+  'Disability Welfare',
+  'Pension',
+  'Welfare',
+  'Insurance',
+  'Financial Inclusion',
+  'Digital Inclusion',
+];
 
 export const STATES = ["Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana","Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal","Delhi","J&K"];
 
