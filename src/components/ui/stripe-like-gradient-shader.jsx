@@ -1,22 +1,34 @@
 import { cn } from "@/lib/utils";
-import { useState } from "react";
-import { GradFlow } from 'gradflow'
-
-// Want to create stunning backgrounds and play with the colors and values? Check out https://gradflow.meera.dev/
+import { GradFlow } from "gradflow";
 
 export const StripeGradientShader = ({ className }) => {
-
   return (
-    <div className={cn("relative h-screen w-full", className)}>
-      <GradFlow config={{
-        color1: { r: 255, g: 255, b: 255 },
-        color2: { r: 66, g: 255, b: 233 },
-        color3: { r: 129, g: 6, b: 190 },
-        speed: 0.4,
-        scale: 1,
-        type: 'stripe',
-        noise: 0.08
-      }} />
+    <div
+      className={cn("pointer-events-none", className)}
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden',
+        transform: "scale(7)",
+        transformOrigin: "top center",
+      }}
+    >
+      <GradFlow
+        config={{
+          color1: { r: 245, g: 26, b: 84 },
+          color2: { r: 255, g: 206, b: 227 },
+          color3: { r: 255, g: 255, b: 255 },
+          speed: 2,
+          scale: 2.5,
+          type: "stripe",
+          noise: 0.01,
+        }}
+      />
     </div>
   );
 };
