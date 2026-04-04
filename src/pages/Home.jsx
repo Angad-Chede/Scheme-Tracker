@@ -1,8 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles/home.css';
 import CountUp from '../components/CountUp';
 import { CATS } from '../data';
 import { StripeGradientShader } from '../components/ui/stripe-like-gradient-shader';
+
+const FOUNDATION_TABS = [
+  {
+    id: 'process',
+    label: 'Process',
+    title: 'Four simple steps to discover and claim your government benefits.',
+    items: [
+      { title: 'Create Your Profile', desc: 'Share details like age, income, and occupation.', icon: 'M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z' },
+      { title: 'Check Eligibility', desc: 'Our engine scans 30+ schemes instantly.', icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' },
+      { title: 'Get Schemes', desc: 'See personalized matches and exact benefits.', icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10' },
+    ]
+  },
+  {
+    id: 'features',
+    label: 'Features',
+    title: 'Everything you need to easily claim your benefits.',
+    items: [
+      { title: 'Smart Engine', desc: 'AI-powered eligibility matching across criteria.', icon: 'M13 10V3L4 14h7v7l9-11h-7z' },
+      { title: 'Missing Docs', desc: 'Identify required documents without guesswork.', icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
+      { title: 'Track Deadlines', desc: 'Never miss an application date or deadline.', icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
+    ]
+  },
+  {
+    id: 'compare',
+    label: 'Compare',
+    title: 'Why millions choose SchemeTracker over manual search.',
+    items: [
+      { title: 'Instant Matching', desc: 'Stop missing schemes you actually qualify for.', icon: 'M5 13l4 4L19 7' },
+      { title: 'Simple Rules', desc: 'Navigate complex government rules with a unified backend.', icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z' },
+      { title: 'One Dashboard', desc: 'Manage your documents and applications in one place.', icon: 'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z' },
+    ]
+  }
+];
 
 const TESTIMONIALS = [
   { color: 'green', quote: 'I had no idea I was eligible for 5 schemes until SchemeTracker matched my profile. Applied for PM Kisan within minutes!', name: 'Rajesh Kumar', role: 'Farmer, Bihar' },
@@ -38,9 +71,17 @@ const FAQ_ITEMS = [
 export default function Home({ navigate, setFilter }) {
   const [sliderIdx, setSliderIdx] = useState(0);
   const [openFaq, setOpenFaq] = useState(null);
+  const [foundationTab, setFoundationTab] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setFoundationTab(p => (p + 1) % 3);
+    }, 5000);
+    return () => clearInterval(t);
+  }, []);
 
   function moveSlider(dir) {
-    setSliderIdx(prev => Math.max(0, Math.min(prev + dir, TESTIMONIALS.length - 2)));
+    setSliderIdx(prev => Math.max(0, Math.min(prev + dir, TESTIMONIALS.length - 1)));
   }
 
   return (
@@ -171,52 +212,66 @@ export default function Home({ navigate, setFilter }) {
           </div>
         </div>
       <div className="home-container">
-        {/* ── HOW IT WORKS ── */}
-        <div className="section-label">PROCESS</div>
-        <h2 className="section-title">
-          How <span className="text-blue">SchemeTracker</span> Works
-        </h2>
-        <p className="section-subtitle">Four simple steps to discover your benefits</p>
-
-        <div className="how-timeline">
-          <div className="how-timeline-line"></div>
-          {[
-            { title: 'Create Your Profile', desc: 'Share basic details like age, income, occupation, and location.' },
-            { title: 'Check Eligibility', desc: 'Our engine scans 30+ schemes and matches them to your profile instantly.' },
-            { title: 'Get Personalized Schemes', desc: 'See which schemes you qualify for with benefits, deadlines, and requirements.' },
-            { title: 'Complete Documents', desc: 'Know exactly which documents are missing and how to get them.' },
-          ].map((step, i) => (
-            <div key={i} className={`how-step ${i % 2 === 0 ? 'how-step-left' : 'how-step-right'}`}>
-              <div className="how-step-card">
-                <h3 className="how-step-title">{step.title}</h3>
-                <p className="how-step-desc">{step.desc}</p>
+        {/* ── INTERACTIVE FOUNDATION ── */}
+        <div className="foundation-wrapper" style={{ marginBottom: '80px' }}>
+          <div className="section-label">THE SOLUTION</div>
+          <h2 className="section-title" style={{ marginBottom: '40px' }}>
+            Our foundation for <span className="text-blue">benefit discovery.</span>
+          </h2>
+          
+          <div className="foundation-card">
+            <div className="foundation-bg"></div>
+            <div className="foundation-content">
+              {/* TABS */}
+              <div className="foundation-tabs">
+                {FOUNDATION_TABS.map((tab, idx) => (
+                  <button 
+                    key={tab.id} 
+                    className={`foundation-tab ${foundationTab === idx ? 'active' : ''}`}
+                    onClick={() => setFoundationTab(idx)}
+                  >
+                    {foundationTab === idx && (
+                      <span className="foundation-tab-icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginRight: '4px' }}>
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                          <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                      </span>
+                    )}
+                    {tab.label}
+                  </button>
+                ))}
               </div>
-              <div className="how-step-dot"></div>
+              
+              <h3 className="foundation-main-title">
+                {FOUNDATION_TABS[foundationTab].title}
+              </h3>
+              
+              <div className="foundation-items">
+                {FOUNDATION_TABS[foundationTab].items.map((item, i) => (
+                  <div key={i} className="foundation-item" style={{ animationDelay: `${i * 0.1}s` }}>
+                    <div className="foundation-item-text">
+                      <h4>{item.title}</h4>
+                      <p>{item.desc}</p>
+                    </div>
+                    <div className="foundation-item-icon">
+                      <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.icon}></path>
+                      </svg>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
-        </div>
-
-        {/* ── FEATURES ── */}
-        <div className="section-label">FEATURES</div>
-        <h2 className="section-title">
-          Everything You Need to <span className="text-blue">Claim Your Benefits</span>
-        </h2>
-        <div className="features-grid">
-          {FEATURES.map((f, i) => (
-            <div key={f.title} className={`feature-item ${i % 2 === 0 ? 'feature-item-left' : 'feature-item-right'}`}>
-              <div className="feature-card">
-                <div className="feature-tag-row">
-
-                  <span className="feature-tag">{f.tag}</span>
-                </div>
-                <h3 className="feature-title">{f.title}</h3>
-                <p className="feature-desc">{f.desc}</p>
-              </div>
-              <div className="feature-visual">
-                <img src={f.image} alt={f.title} className="feature-visual-img" />
-              </div>
+            
+            <div className="foundation-visual">
+               <div className="f-globe-container">
+                 <div className="f-globe"></div>
+                 <div className="f-globe-glow"></div>
+                 <div className="f-globe-grid"></div>
+               </div>
             </div>
-          ))}
+          </div>
         </div>
 
         {/* ── SCHEME EXPLORER ── */}
@@ -265,79 +320,60 @@ export default function Home({ navigate, setFilter }) {
         </div>
       </div>
 
-      <section className="compare-section">
-        <div className="section-label white">THE PROBLEM &amp; SOLUTION</div>
-        <h2 className="compare-title">
-          Why Millions Miss Their <span className="text-teal">Entitled Benefits</span>
-        </h2>
-        <div className="compare-grid">
-          <div className="compare-col">
-            <div className="compare-col-head red">WITHOUT SCHEMETRACKER</div>
-            {[
-              'You miss schemes you actually qualify for',
-              'Eligibility rules are complex and confusing',
-              'Documents scattered across departments',
-              'Government portals are hard to navigate',
-            ].map(t => (
-              <div key={t} className="compare-row compare-row-bad">
-                <span className="compare-x">✕</span>
-                {t}
-              </div>
-            ))}
+      <section className="testimonials-full">
+        <div className="tf-bg-container">
+          <div className="tf-crazy-glow"></div>
+        </div>
+        
+        <div className="tf-content">
+          <div className="tf-header">
+            <div className="tf-label">REAL STORIES</div>
+            <h2 className="tf-title">
+              A fuller spectrum of benefits.<br/>
+              Powered by everyday people.
+            </h2>
           </div>
-          <div className="compare-col">
-            <div className="compare-col-head green">WITH SCHEMETRACKER</div>
-            {[
-              'Instant matching against 30+ schemes',
-              'Simple profile-based eligibility engine',
-              'Missing document detection & guidance',
-              'One unified, intuitive dashboard',
-            ].map(t => (
-              <div key={t} className="compare-row compare-row-good">
-                <span className="compare-check">✓</span>
-                {t}
-              </div>
-            ))}
+
+          <div className="tf-carousel-wrapper">
+            <div className="tf-track" style={{ transform: `translateX(calc(-${sliderIdx} * 364px))` }}>
+              {TESTIMONIALS.map((t, i) => {
+                const parts = t.name.split(' ');
+                const first = parts[0] || '';
+                const rest = parts.slice(1).join(' ') || '';
+                const colors = ["text-orange", "text-blue", "text-teal-alt"];
+                const colorClass = colors[i % colors.length];
+                return (
+                  <div key={i} className="tf-card">
+                    <div className="tf-card-top">
+                      <h3 className="tf-card-name">
+                        <span className="tf-name-dark">{first}</span> <span className={colorClass}>{rest}</span>
+                      </h3>
+                      <div className="tf-card-badge">
+                        <span className="tf-badge-num">100%</span> Match
+                      </div>
+                    </div>
+                    <div className="tf-card-body">
+                      {t.quote}
+                    </div>
+                    <div className="tf-card-role">{t.role}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="tf-nav">
+            <button className="tf-nav-btn" onClick={() => moveSlider(-1)} disabled={sliderIdx === 0}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </button>
+            <button className="tf-nav-btn" onClick={() => moveSlider(1)} disabled={sliderIdx >= TESTIMONIALS.length - 1}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
           </div>
         </div>
       </section>
 
       <div className="home-container">
-        {/* ── TESTIMONIALS ── */}
-        <div className="section-label">TESTIMONIALS</div>
-        <div className="testimonials-section">
-          <div className="testimonials-left">
-            <h2 className="testimonials-heading">
-              TRUSTED BY
-              <br />
-              THOUSANDS
-            </h2>
-            <p className="testimonials-sub">See the stories of people who discovered their government benefits.</p>
-            <div className="testimonials-navs">
-              <button className={`t-nav-btn ${sliderIdx > 0 ? 't-nav-active' : ''}`} onClick={() => moveSlider(-1)}>
-                ←
-              </button>
-              <button
-                className={`t-nav-btn ${sliderIdx < TESTIMONIALS.length - 2 ? 't-nav-active' : ''}`}
-                onClick={() => moveSlider(1)}
-              >
-                →
-              </button>
-            </div>
-          </div>
-          <div className="testimonials-cards-area">
-            <div className="testimonials-track" style={{ transform: `translateX(calc(-${sliderIdx} * (50% + 10px)))` }}>
-              {TESTIMONIALS.map(t => (
-                <div key={t.name} className={`t-card t-card--${t.color}`}>
-                  <div className="t-card-logo">▶</div>
-                  <p className="t-card-quote">"{t.quote}"</p>
-                  <div className="t-card-name">{t.name}</div>
-                  <div className="t-card-role">{t.role}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
 
         {/* ── FAQ ── */}
         <div className="section-label">FAQ</div>
