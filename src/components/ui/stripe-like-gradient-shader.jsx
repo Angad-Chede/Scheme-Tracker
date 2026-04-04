@@ -14,19 +14,19 @@ export const StripeGradientShader = ({ className }) => {
         width: '100%',
         height: '100%',
         overflow: 'hidden',
-        transform: "scale(7)",
+        transform: "scale(1)",
         transformOrigin: "top center",
       }}
     >
       <GradFlow
         config={{
-          color1: { r: 245, g: 26, b: 84 },
-          color2: { r: 255, g: 206, b: 227 },
+          color1: { r: 165, g: 56, b: 96},
+          color2: { r: 103, g: 13, b: 47 },
           color3: { r: 255, g: 255, b: 255 },
           speed: 2,
-          scale: 2.5,
+          scale: 1,
           type: "stripe",
-          noise: 0.01,
+          noise: 0.02,
         }}
       />
     </div>
