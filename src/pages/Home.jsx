@@ -45,7 +45,7 @@ export default function Home({ navigate, setFilter }) {
 
   return (
     <div className="home-root">
-      {/* ── SHADER BACKGROUND WRAPPER (Hero + Stats + Categories) ── */}
+      {/* ── SHADER BACKGROUND WRAPPER (Hero Only) ── */}
       <div style={{ position: 'relative', overflow: 'hidden' }}>
         <div
           style={{
@@ -129,9 +129,10 @@ export default function Home({ navigate, setFilter }) {
             </div>
           </div>
         </section>
+      </div>
 
-        {/* ── STATS STRIP ── */}
-        <section className="stats-strip" style={{ position: 'relative', zIndex: 1 }}>
+      {/* ── STATS STRIP ── */}
+      <section className="stats-strip" style={{ position: 'relative', zIndex: 10 }}>
           {[
             { num: 30, suffix: '+', label: 'Schemes Tracked' },
             { num: 10, suffix: 'k+', label: 'Eligibility Checks' },
@@ -169,8 +170,6 @@ export default function Home({ navigate, setFilter }) {
             ))}
           </div>
         </div>
-      </div>
-
       <div className="home-container">
         {/* ── HOW IT WORKS ── */}
         <div className="section-label">PROCESS</div>
