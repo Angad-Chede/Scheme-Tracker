@@ -238,7 +238,7 @@ export default function Checker({ step, profile, onUpdate, onNext, onBack, onSub
             </button>
             {step < STEPS.length - 1
               ? <button className="btn btn-primary btn-nav-next" onClick={handleNext}>Continue to Next →</button>
-              : <button className="btn btn-primary btn-nav-next" onClick={onSubmit}>🚀 Discover Schemes</button>
+              : <button className="btn btn-primary btn-nav-next" onClick={onSubmit}>Discover Schemes</button>
             }
           </div>
         </div>
