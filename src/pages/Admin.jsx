@@ -2,7 +2,7 @@ import { useState } from 'react';
 import '../styles/admin.css';
 import { SCHEMES, CATS } from '../data';
 
-export default function Admin({ user, navigate, showToast }) {
+export default function Admin({ user, showToast }) {
   const [tab, setTab] = useState('overview');
   const [adminSchemes, setAdminSchemes] = useState([...SCHEMES]);
 
