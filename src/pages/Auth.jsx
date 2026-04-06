@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/auth.css';
 import { supabase } from '../lib/supabase';
 
 export default function Auth({ mode, onLogin, showToast }) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || '/dashboard';
   const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [loading, setLoading] = useState(false);
 
@@ -41,7 +43,7 @@ export default function Auth({ mode, onLogin, showToast }) {
 
         onLogin(appUser);
         showToast('Welcome back, ' + appUser.name + '!', 'success');
-        navigate('/dashboard');
+        navigate(from, { replace: true });
       } else {
         const { data, error } = await supabase.auth.signUp({
           email: form.email,
@@ -74,7 +76,7 @@ export default function Auth({ mode, onLogin, showToast }) {
 
         if (data.session) {
           showToast('Account created! Welcome to SchemeTracker', 'success');
-          navigate('/checker');
+          navigate(from === '/results' ? '/results' : '/checker', { replace: true });
         } else {
           showToast('Signup successful! Please verify your email before logging in.', 'success');
           navigate('/login');
@@ -170,7 +172,7 @@ export default function Auth({ mode, onLogin, showToast }) {
           {mode === 'login' ? "Don't have an account? " : "Already have an account? "}
           <span
             className="auth-switch-link"
-            onClick={() => navigate(mode === 'login' ? '/signup' : '/login')}
+            onClick={() => navigate(mode === 'login' ? '/signup' : '/login', { state: { from } })}
           >
             {mode === 'login' ? 'Sign up' : 'Sign in'}
           </span>
