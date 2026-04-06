@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/home.css';
 import CountUp from '../components/CountUp';
 import { CATS } from '../data';
@@ -87,7 +88,8 @@ const FAQ_ITEMS = [
   { q: 'Is my data secure?', a: 'Absolutely. We never share your personal data with third parties. Your profile is stored securely and used only for eligibility matching.' },
 ];
 
-export default function Home({ navigate, setFilter }) {
+export default function Home({ setFilter }) {
+  const navigate = useNavigate();
   const [sliderIdx, setSliderIdx] = useState(0);
   const [openFaq, setOpenFaq] = useState(null);
   const [foundationTab, setFoundationTab] = useState(0);
@@ -133,10 +135,10 @@ export default function Home({ navigate, setFilter }) {
             </p>
 
             <div className="hero2-actions">
-              <button className="btn hero2-btn-primary" onClick={() => navigate('checker')}>
+              <button className="btn hero2-btn-primary" onClick={() => navigate('/checker')}>
                 Check Eligibility →
               </button>
-              <button className="btn hero2-btn-outline" onClick={() => navigate('schemes')}>
+              <button className="btn hero2-btn-outline" onClick={() => navigate('/schemes')}>
                 Explore Schemes
               </button>
             </div>
@@ -212,23 +214,24 @@ export default function Home({ navigate, setFilter }) {
           From farmers to students, women to senior citizens
         </p>
 
-        <div className="cat-gallery">
-          {CATS.slice(0, 12).map((cat, idx) => (
-            <div
-              key={cat}
-              className="cat-gallery-item"
-              style={{ animationDelay: `${idx * 0.08}s` }}
-              onClick={() => {
-                setFilter(cat);
-                navigate('schemes');
-              }}
-            >
-              <img src={CATEGORY_IMAGES[cat] || imgAgri} alt={cat} className="cat-gallery-img" />
-              <div className="cat-gallery-overlay">
-                <span className="cat-gallery-title">{cat}</span>
+        <div className="marquee-container">
+          <div className="cat-gallery">
+            {[...CATS.slice(0, 12), ...CATS.slice(0, 12)].map((cat, idx) => (
+              <div
+                key={`${cat}-${idx}`}
+                className="cat-gallery-item"
+                onClick={() => {
+                  setFilter(cat);
+                  navigate('/schemes');
+                }}
+              >
+                <img src={CATEGORY_IMAGES[cat] || imgAgri} alt={cat} className="cat-gallery-img" />
+                <div className="cat-gallery-overlay">
+                  <span className="cat-gallery-title">{cat}</span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
@@ -325,7 +328,7 @@ export default function Home({ navigate, setFilter }) {
               </thead>
               <tbody>
                 {SCHEMES.map((s) => (
-                  <tr key={s.name} onClick={() => navigate('schemes')}>
+                  <tr key={s.name} onClick={() => navigate('/schemes')}>
                     <td className="st-name-cell">
                       <strong>{s.name}</strong>
                       <div className="st-tags">
@@ -446,7 +449,7 @@ export default function Home({ navigate, setFilter }) {
             SchemeTracker. It&apos;s free, instant, and private.
           </p>
 
-          <button className="btn btn-lg cta-btn" onClick={() => navigate('checker')}>
+          <button className="btn btn-lg cta-btn" onClick={() => navigate('/checker')}>
             <span className="cta-btn-label">Check Your Eligibility Now</span>
             <span className="cta-btn-hover">
               <span>Check Your Eligibility Now</span>
