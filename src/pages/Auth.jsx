@@ -1,25 +1,90 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/auth.css';
-import { DEMO_USERS } from '../data';
+import { supabase } from '../lib/supabase';
 
-export default function Auth({ mode, navigate, onLogin, showToast }) {
+export default function Auth({ mode, onLogin, showToast }) {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit() {
-    if (mode === 'login') {
-      const u = DEMO_USERS.find(u => u.email === form.email && u.password === form.password);
-      if (u) {
-        onLogin({ ...u });
-        showToast('Welcome back, ' + u.name + '!', 'success');
-        navigate('dashboard');
+  async function handleSubmit() {
+    if (!form.email || !form.password || (mode === 'signup' && !form.name)) {
+      showToast('Please fill all fields', 'error');
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      if (mode === 'login') {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: form.email,
+          password: form.password,
+        });
+
+        if (error) {
+          showToast(error.message || 'Invalid credentials', 'error');
+          return;
+        }
+
+        const sbUser = data.user;
+
+        const appUser = {
+          id: sbUser.id,
+          name: sbUser.user_metadata?.name || sbUser.email?.split('@')[0] || 'User',
+          email: sbUser.email,
+          role: sbUser.user_metadata?.role || 'user',
+          profile: null,
+          bookmarks: [],
+        };
+
+        onLogin(appUser);
+        showToast('Welcome back, ' + appUser.name + '!', 'success');
+        navigate('/dashboard');
       } else {
-        showToast('Invalid credentials. Try user@demo.com / demo123', 'error');
+        const { data, error } = await supabase.auth.signUp({
+          email: form.email,
+          password: form.password,
+          options: {
+            data: {
+              name: form.name,
+              role: 'user',
+            },
+          },
+        });
+
+        if (error) {
+          showToast(error.message || 'Signup failed', 'error');
+          return;
+        }
+
+        const sbUser = data.user;
+
+        const appUser = {
+          id: sbUser?.id || '' + Date.now(),
+          name: form.name,
+          email: form.email,
+          role: 'user',
+          profile: null,
+          bookmarks: [],
+        };
+
+        onLogin(appUser);
+
+        if (data.session) {
+          showToast('Account created! Welcome to SchemeTracker', 'success');
+          navigate('/checker');
+        } else {
+          showToast('Signup successful! Please verify your email before logging in.', 'success');
+          navigate('/login');
+        }
       }
-    } else {
-      if (!form.name || !form.email || !form.password) { showToast('Please fill all fields', 'error'); return; }
-      onLogin({ id: '' + Date.now(), name: form.name, email: form.email, role: 'user', profile: null, bookmarks: [] });
-      showToast('Account created! Welcome to SchemeTracker', 'success');
-      navigate('checker');
+    } catch (err) {
+      console.error('Auth error:', err);
+      showToast(err.message || 'Something went wrong', 'error');
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -28,51 +93,85 @@ export default function Auth({ mode, navigate, onLogin, showToast }) {
       <div className="auth-card">
         <div className="auth-header">
           <div className="auth-icon">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
               <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
             </svg>
           </div>
+
           <h2 className="auth-title">{mode === 'login' ? 'Welcome Back' : 'Create Account'}</h2>
+
           <p className="auth-subtitle">
-            {mode === 'login' ? 'Sign in to your account' : 'Join thousands discovering their benefits'}
+            {mode === 'login'
+              ? 'Sign in to your account'
+              : 'Join thousands discovering their benefits'}
           </p>
         </div>
 
         {mode === 'signup' && (
           <div className="auth-field">
             <label className="lbl">Full Name</label>
-            <input className="inp" type="text" placeholder="Ramesh Kumar"
-              value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} />
+            <input
+              className="inp"
+              type="text"
+              placeholder="Ramesh Kumar"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+            />
           </div>
         )}
 
         <div className="auth-field">
           <label className="lbl">Email Address</label>
-          <input className="inp" type="email" placeholder="you@example.com"
-            value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
+          <input
+            className="inp"
+            type="email"
+            placeholder="you@example.com"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+          />
         </div>
 
         <div className="auth-field-last">
           <label className="lbl">Password</label>
-          <input className="inp" type="password" placeholder="••••••••"
-            value={form.password} onChange={e => setForm({ ...form, password: e.target.value })} />
+          <input
+            className="inp"
+            type="password"
+            placeholder="••••••••"
+            value={form.password}
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
+          />
         </div>
 
-        {mode === 'login' && (
-          <div className="auth-demo-hint">
-            Demo — User: <strong>user@demo.com</strong> / <strong>demo123</strong><br />
-            Admin: <strong>admin@demo.com</strong> / <strong>admin123</strong>
-          </div>
-        )}
-
-        <button className="btn btn-primary auth-submit" onClick={handleSubmit}>
-          {mode === 'login' ? 'Sign In' : 'Create Account'}
+        <button
+          className="btn btn-primary auth-submit"
+          onClick={handleSubmit}
+          disabled={loading}
+        >
+          {loading
+            ? mode === 'login'
+              ? 'Signing In...'
+              : 'Creating Account...'
+            : mode === 'login'
+            ? 'Sign In'
+            : 'Create Account'}
         </button>
 
         <div className="auth-switch">
           {mode === 'login' ? "Don't have an account? " : "Already have an account? "}
-          <span className="auth-switch-link" onClick={() => navigate(mode === 'login' ? 'signup' : 'login')}>
+          <span
+            className="auth-switch-link"
+            onClick={() => navigate(mode === 'login' ? '/signup' : '/login')}
+          >
             {mode === 'login' ? 'Sign up' : 'Sign in'}
           </span>
         </div>
