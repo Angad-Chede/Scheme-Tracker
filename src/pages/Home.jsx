@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'motion/react';
 import '../styles/home.css';
 import CountUp from '../components/CountUp';
 import { CATS } from '../data';
@@ -88,6 +89,37 @@ const FAQ_ITEMS = [
   { q: 'Is my data secure?', a: 'Absolutely. We never share your personal data with third parties. Your profile is stored securely and used only for eligibility matching.' },
 ];
 
+// Animation variants (Defined outside to prevent re-creation on every render)
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } 
+  }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3
+    }
+  }
+};
+
+const titleAnimation = {
+  hidden: { scale: 1.5, filter: 'blur(10px)', opacity: 0 },
+  visible: { 
+    scale: 1, 
+    filter: 'blur(0px)', 
+    opacity: 1,
+    transition: { duration: 1.2, ease: [0.19, 1, 0.22, 1] }
+  }
+};
+
 export default function Home({ setFilter }) {
   const navigate = useNavigate();
   const [sliderIdx, setSliderIdx] = useState(0);
@@ -106,6 +138,15 @@ export default function Home({ setFilter }) {
 
   useEffect(() => {
     startFoundationTimer();
+    
+    // Handle initial hash scrolling on mount (e.g. coming from /schemes#about)
+    if (window.location.hash) {
+      setTimeout(() => {
+        const el = document.querySelector(window.location.hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 500); // Small delay to ensure content is rendered
+    }
+
     return () => clearInterval(timerRef.current);
   }, [startFoundationTimer]);
 
@@ -130,25 +171,34 @@ export default function Home({ setFilter }) {
         <div className="hero2-bg-glow hero2-bg-glow-2"></div>
         <div className="hero2-grid"></div>
 
-        <div className="hero2-inner">
+        <motion.div 
+          className="hero2-inner"
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
+          key="hero-inner"
+        >
           <div className="hero2-left">
-            <span className="hero2-badge">✦ Smart Government Scheme Discovery</span>
+            <motion.span className="hero2-badge" variants={fadeInUp}>✦ Smart Government Scheme Discovery</motion.span>
 
-            <h1 className="hero2-title">
+            <motion.h1 
+              className="hero2-title"
+              variants={titleAnimation}
+            >
               Discover Every
               <br />
               <span className="hero2-title-gradient">Government Scheme</span>
               <br />
               You&apos;re Entitled To
-            </h1>
+            </motion.h1>
 
-            <p className="hero2-subtitle">
+            <motion.p className="hero2-subtitle" variants={fadeInUp}>
               Stop missing benefits you qualify for. SchemeTracker intelligently matches your
               profile against 30+ government schemes and tells you exactly what you&apos;re
               eligible for — in seconds.
-            </p>
+            </motion.p>
 
-            <div className="hero2-actions">
+            <motion.div className="hero2-actions" variants={fadeInUp}>
               <button className="btn hero2-btn-primary" onClick={() => navigate('/checker')}>
                 <span>Check Eligibility</span>
                 <span className="btn-icon"></span>
@@ -157,18 +207,16 @@ export default function Home({ setFilter }) {
                 <span>Explore Schemes</span>
                 <span className="btn-icon"></span>
               </button>
-            </div>
+            </motion.div>
 
-            <div className="hero2-trust">
+            <motion.div className="hero2-trust" variants={fadeInUp}>
               <span className="hero2-trust-badge hero2-trust-green">100% Free</span>
               <span className="hero2-trust-badge hero2-trust-blue">10k+ Users</span>
               <span className="hero2-trust-badge hero2-trust-cyan">Instant Results</span>
-            </div>
+            </motion.div>
           </div>
 
-          <div className="hero2-right">
-
-
+          <motion.div className="hero2-right" variants={fadeInUp}>
             <div className="hero2-mockup">
               <div className="mockup-bar">
                 <span className="mockup-dot red"></span>
@@ -200,55 +248,68 @@ export default function Home({ setFilter }) {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* STATS STRIP */}
-      <section className="stats-strip">
+      <motion.section 
+        className="stats-strip"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ amount: 0.3 }}
+        variants={staggerContainer}
+      >
         {[
           { num: 30, suffix: '+', label: 'Schemes Tracked' },
           { num: 10, suffix: 'k+', label: 'Eligibility Checks' },
           { num: 95, suffix: '%', label: 'Faster Discovery' },
           { num: 12, suffix: '+', label: 'Beneficiary Categories' },
         ].map((s) => (
-          <div key={s.label} className="stat-item">
+          <motion.div key={s.label} className="stat-item" variants={fadeInUp}>
             <div className="stat-num">
               <CountUp from={0} to={s.num} duration={2} />
               {s.suffix}
             </div>
             <div className="stat-label">{s.label.toUpperCase()}</div>
-          </div>
+          </motion.div>
         ))}
-      </section>
+      </motion.section>
 
       {/* CATEGORIES */}
       <div className="home-container" style={{ paddingBottom: '60px' }}>
-        <div className="section-label">CATEGORIES</div>
-        <h2 className="section-title">Schemes for Every Indian</h2>
-        <p className="section-subtitle" style={{ marginBottom: '40px' }}>
-          From farmers to students, women to senior citizens
-        </p>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ amount: 0.2 }}
+          variants={staggerContainer}
+        >
+          <motion.div className="section-label" variants={fadeInUp}>CATEGORIES</motion.div>
+          <motion.h2 className="section-title" variants={fadeInUp}>Schemes for Every Indian</motion.h2>
+          <motion.p className="section-subtitle" style={{ marginBottom: '40px' }} variants={fadeInUp}>
+            From farmers to students, women to senior citizens
+          </motion.p>
 
-        <div className="marquee-container">
-          <div className="cat-gallery">
-            {[...CATS.slice(0, 12), ...CATS.slice(0, 12)].map((cat, idx) => (
-              <div
-                key={`${cat}-${idx}`}
-                className="cat-gallery-item"
-                onClick={() => {
-                  setFilter(cat);
-                  navigate('/schemes');
-                }}
-              >
-                <img src={CATEGORY_IMAGES[cat] || imgAgri} alt={cat} className="cat-gallery-img" />
-                <div className="cat-gallery-overlay">
-                  <span className="cat-gallery-title">{cat}</span>
+          <motion.div className="marquee-container" variants={fadeInUp}>
+            <div className="cat-gallery">
+              {[...CATS.slice(0, 12), ...CATS.slice(0, 12)].map((cat, idx) => (
+                <div
+                  key={`${cat}-${idx}`}
+                  className="cat-gallery-item"
+                  onClick={() => {
+                    setFilter(cat);
+                    navigate('/schemes');
+                  }}
+                >
+                  <img src={CATEGORY_IMAGES[cat] || imgAgri} alt={cat} className="cat-gallery-img" />
+                  <div className="cat-gallery-overlay">
+                    <span className="cat-gallery-title">{cat}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
 
       <div className="home-container">
@@ -556,7 +617,7 @@ export default function Home({ setFilter }) {
         </div>
 
         {/* FOOTER */}
-        <footer className="home-footer2">
+        <footer id="about" className="home-footer2">
           <div className="footer-top">
             <div className="footer-brand-col">
               <div className="footer-brand">
