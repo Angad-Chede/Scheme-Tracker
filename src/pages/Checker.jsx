@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/checker.css';
 import { CATS, STATES, DOCS } from '../data';
 
 const STEPS = ['Basic Info', 'Income & Status', 'Documents', 'Preferences'];
 
-export default function Checker({ step, profile, onUpdate, onNext, onBack, onSubmit, navigate }) {
+export default function Checker({ step, profile, onUpdate, onNext, onBack, onSubmit }) {
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
 
   function updateP(key, val) {
@@ -231,7 +233,7 @@ export default function Checker({ step, profile, onUpdate, onNext, onBack, onSub
           {stepContent}
           <hr style={{ margin: '32px 0 0px' }} />
           <div className="checker-nav">
-            <button className="btn btn-ghost" onClick={step > 0 ? onBack : () => navigate('home')}>
+            <button className="btn btn-ghost" onClick={step > 0 ? onBack : () => navigate('/')}>
               {step === 0 ? '← Exit to Home' : '← Previous Step'}
             </button>
             {step < STEPS.length - 1
