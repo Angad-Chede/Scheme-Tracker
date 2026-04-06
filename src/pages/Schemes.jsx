@@ -11,7 +11,6 @@ export default function Schemes({
   btype,
   setBtype,
   user,
-  navigate,
   onToggleBookmark,
   showToast,
 }) {
