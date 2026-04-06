@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/home.css';
 import CountUp from '../components/CountUp';
@@ -93,13 +93,27 @@ export default function Home({ setFilter }) {
   const [sliderIdx, setSliderIdx] = useState(0);
   const [openFaq, setOpenFaq] = useState(null);
   const [foundationTab, setFoundationTab] = useState(0);
+  const [timerKey, setTimerKey] = useState(0);
+  const timerRef = useRef(null);
+
+  const startFoundationTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setFoundationTab((p) => (p + 1) % 3);
+      setTimerKey((k) => k + 1);
+    }, 5000);
+  }, []);
 
   useEffect(() => {
-    const t = setInterval(() => {
-      setFoundationTab((p) => (p + 1) % 3);
-    }, 5000);
-    return () => clearInterval(t);
-  }, []);
+    startFoundationTimer();
+    return () => clearInterval(timerRef.current);
+  }, [startFoundationTimer]);
+
+  function handleTabClick(idx) {
+    setFoundationTab(idx);
+    setTimerKey((k) => k + 1);
+    startFoundationTimer();
+  }
 
   function moveSlider(dir) {
     setSliderIdx((prev) => Math.max(0, Math.min(prev + dir, TESTIMONIALS.length - 1)));
@@ -254,7 +268,7 @@ export default function Home({ setFilter }) {
                   <button
                     key={tab.id}
                     className={`foundation-tab ${foundationTab === idx ? 'active' : ''}`}
-                    onClick={() => setFoundationTab(idx)}
+                    onClick={() => handleTabClick(idx)}
                   >
                     {foundationTab === idx && (
                       <span className="foundation-tab-icon">
@@ -273,13 +287,16 @@ export default function Home({ setFilter }) {
                       </span>
                     )}
                     {tab.label}
+                    {foundationTab === idx && (
+                      <span className="foundation-tab-progress" key={timerKey}></span>
+                    )}
                   </button>
                 ))}
               </div>
 
               <h3 className="foundation-main-title">{FOUNDATION_TABS[foundationTab].title}</h3>
 
-              <div className="foundation-items">
+              <div className="foundation-items" key={`items-${foundationTab}-${timerKey}`}>
                 {FOUNDATION_TABS[foundationTab].items.map((item, i) => (
                   <div key={i} className="foundation-item" style={{ animationDelay: `${i * 0.1}s` }}>
                     <div className="foundation-item-text">
@@ -297,10 +314,87 @@ export default function Home({ setFilter }) {
             </div>
 
             <div className="foundation-visual">
-              <div className="f-globe-container">
-                <div className="f-globe"></div>
-                <div className="f-globe-glow"></div>
-                <div className="f-globe-grid"></div>
+              {/* Process Tab — Pipeline / Flow Structure */}
+              <div className={`fv-scene fv-pipeline ${foundationTab === 0 ? 'fv-active' : ''}`}>
+                <div className="fv-pipeline-glow"></div>
+                <div className="fv-pipeline-line"></div>
+                {[
+                  { label: 'Profile', delay: 0, icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
+                  { label: 'Scan', delay: 1, icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' },
+                  { label: 'Match', delay: 2, icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' },
+                  { label: 'Claim', delay: 3, icon: 'M5 13l4 4L19 7' },
+                ].map((step, i) => (
+                  <div key={i} className="fv-pipe-node" style={{ animationDelay: `${step.delay * 0.25}s` }}>
+                    <div className="fv-pipe-ring">
+                      <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={step.icon} />
+                      </svg>
+                    </div>
+                    <span className="fv-pipe-label">{step.label}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Features Tab — Hexagonal Circuit Structure */}
+              <div className={`fv-scene fv-circuit ${foundationTab === 1 ? 'fv-active' : ''}`}>
+                <div className="fv-circuit-glow"></div>
+                {[0, 1, 2, 3, 4, 5, 6].map((i) => (
+                  <div key={i} className={`fv-hex fv-hex-${i}`} style={{ animationDelay: `${i * 0.12}s` }}>
+                    <div className="fv-hex-inner"></div>
+                  </div>
+                ))}
+                <div className="fv-circuit-core">
+                  <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                {[0, 1, 2, 3].map((i) => (
+                  <div key={i} className={`fv-circuit-line fv-cl-${i}`}></div>
+                ))}
+              </div>
+
+              {/* Compare Tab — Speedometer / Rings Structure */}
+              <div className={`fv-scene fv-compare ${foundationTab === 2 ? 'fv-active' : ''}`}>
+                <div className="fv-compare-glow"></div>
+
+                {/* SVG Gradient Definition */}
+                <svg width="0" height="0" style={{ position: 'absolute' }}>
+                  <defs>
+                    <linearGradient id="smartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#0ea5e9" />
+                      <stop offset="100%" stopColor="#6366f1" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+
+                <div className="fv-comp-container">
+                  <div className="fv-comp-side fv-comp-manual">
+                    <div className="fv-comp-ring-wrapper">
+                      <svg viewBox="0 0 100 100" className="fv-comp-ring fv-ring-manual">
+                        <circle cx="50" cy="50" r="45" />
+                      </svg>
+                      <span className="fv-comp-time">14 Days</span>
+                    </div>
+                    <span className="fv-comp-label">Manual Search</span>
+                  </div>
+
+                  <div className="fv-comp-vs">VS</div>
+
+                  <div className="fv-comp-side fv-comp-smart">
+                    <div className="fv-comp-ring-wrapper">
+                      <svg viewBox="0 0 100 100" className="fv-comp-ring fv-ring-smart">
+                        <circle cx="50" cy="50" r="45" />
+                      </svg>
+                      <span className="fv-comp-time fv-text-gradient">2 Mins</span>
+                    </div>
+                    <span className="fv-comp-label">SchemeTracker</span>
+                  </div>
+                </div>
+
+                <div className="fv-compare-badge">
+                  <span className="fv-compare-badge-num">100x</span>
+                  <span>Faster</span>
+                </div>
               </div>
             </div>
           </div>
