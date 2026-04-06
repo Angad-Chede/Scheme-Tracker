@@ -145,7 +145,7 @@
 .hero2-title {
   font-family: var(--font-display, 'Segoe UI', sans-serif);
   font-size: clamp(40px, 6vw, 68px);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.03;
   color: var(--blue-dark, #0f172a);
   margin-bottom: 28px;
