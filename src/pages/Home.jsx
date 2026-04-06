@@ -111,12 +111,12 @@ const staggerContainer = {
 };
 
 const titleAnimation = {
-  hidden: { scale: 1.5, filter: 'blur(10px)', opacity: 0 },
+  hidden: { scale: 1.12, filter: 'blur(6px)', opacity: 0 },
   visible: { 
     scale: 1, 
     filter: 'blur(0px)', 
     opacity: 1,
-    transition: { duration: 1.2, ease: [0.19, 1, 0.22, 1] }
+    transition: { duration: 1.1, ease: [0.19, 1, 0.22, 1] }
   }
 };
 
