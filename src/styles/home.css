@@ -1099,12 +1099,31 @@
   background: #0f172a;
   color: #ffffff;
   box-shadow: 0 4px 10px rgba(15, 23, 42, 0.2);
+  position: relative;
+  overflow: hidden;
 }
 
 .foundation-tab-icon {
   display: flex;
   align-items: center;
 }
+
+.foundation-tab-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  border-radius: 0 2px 2px 0;
+  animation: tabProgress 5s linear forwards;
+}
+
+@keyframes tabProgress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
 
 .foundation-main-title {
   font-size: clamp(20px, 3vw, 24px);
@@ -1157,47 +1176,354 @@
   align-items: center;
   justify-content: center;
   z-index: 1;
+  min-height: 340px;
 }
 
-.f-globe-container {
+/* ---- Shared Scene ---- */
+.fv-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.88) translateY(16px);
+  pointer-events: none;
+  transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1), visibility 0.6s cubic-bezier(0.4,0,0.2,1), transform 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+
+.fv-scene.fv-active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+/* =======================
+   PIPELINE (Process Tab)
+   ======================= */
+.fv-pipeline {
+  flex-direction: column;
+  gap: 0;
+}
+
+.fv-pipeline-glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.35) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: fvPulse 3s ease-in-out infinite alternate;
+}
+
+.fv-pipeline-line {
+  position: absolute;
+  width: 3px;
+  height: 75%;
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.5), rgba(99, 102, 241, 0.5));
+  border-radius: 3px;
+  z-index: 0;
+}
+
+.fv-pipe-node {
   position: relative;
-  width: 320px;
-  height: 320px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  animation: fvNodeEnter 0.5s ease backwards;
 }
 
-.f-globe {
+.fv-pipe-node:nth-child(odd) {
+  flex-direction: row;
+  transform: translateX(-30px);
+}
+
+.fv-pipe-node:nth-child(even) {
+  flex-direction: row-reverse;
+  transform: translateX(30px);
+}
+
+.fv-pipe-ring {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 0 24px rgba(14, 165, 233, 0.4);
+  flex-shrink: 0;
+}
+
+.fv-pipe-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: #ffffff;
+  padding: 5px 14px;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+@keyframes fvNodeEnter {
+  from { opacity: 0; transform: translateY(20px) scale(0.8); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fvPulse {
+  0% { opacity: 0.6; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1.15); }
+}
+
+/* =======================
+   CIRCUIT (Features Tab)
+   ======================= */
+.fv-circuit {
+  position: absolute;
+}
+
+.fv-circuit-glow {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: fvPulse 4s ease-in-out infinite alternate;
+}
+
+.fv-hex {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  animation: fvHexEnter 0.5s ease backwards;
+}
+
+.fv-hex-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(14, 165, 233, 0.15));
+  border: 1.5px solid rgba(99, 102, 241, 0.35);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  transition: background 0.3s;
+}
+
+.fv-hex:hover .fv-hex-inner {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.35), rgba(14, 165, 233, 0.35));
+}
+
+/* Hex positions — radial layout around center */
+.fv-hex-0 { transform: translate(0, -76px); }
+.fv-hex-1 { transform: translate(66px, -38px); }
+.fv-hex-2 { transform: translate(66px, 38px); }
+.fv-hex-3 { transform: translate(0, 76px); }
+.fv-hex-4 { transform: translate(-66px, 38px); }
+.fv-hex-5 { transform: translate(-66px, -38px); }
+.fv-hex-6 { transform: translate(0, 0); }
+
+.fv-hex-6 .fv-hex-inner {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(14, 165, 233, 0.3));
+  border-color: rgba(99, 102, 241, 0.5);
+}
+
+.fv-circuit-core {
+  position: absolute;
+  z-index: 3;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+  animation: fvCorePulse 2.5s ease-in-out infinite alternate;
+}
+
+.fv-circuit-line {
+  position: absolute;
+  background: rgba(99, 102, 241, 0.25);
+  z-index: 1;
+}
+
+.fv-cl-0 { width: 2px; height: 50px; transform: translateY(-53px); }
+.fv-cl-1 { width: 50px; height: 2px; transform: translateX(53px); }
+.fv-cl-2 { width: 2px; height: 50px; transform: translateY(53px); }
+.fv-cl-3 { width: 50px; height: 2px; transform: translateX(-53px); }
+
+@keyframes fvHexEnter {
+  from { opacity: 0; transform: scale(0.3) translate(0, 0); }
+}
+
+@keyframes fvCorePulse {
+  0% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.35); }
+  100% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.65); }
+}
+
+/* =======================
+   COMPARE (Compare Tab)
+   ======================= */
+.fv-compare {
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.fv-compare-glow {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: fvPulse 3.5s ease-in-out infinite alternate;
+}
+
+.fv-comp-container {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  z-index: 2;
+  position: relative;
+}
+
+.fv-comp-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.fv-comp-manual .fv-comp-ring-wrapper {
+  animation: fvRingEnter 0.6s ease backwards 0.1s;
+}
+
+.fv-comp-smart .fv-comp-ring-wrapper {
+  animation: fvRingEnter 0.6s ease backwards 0.3s;
+}
+
+.fv-comp-ring-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fv-comp-ring {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 100%);
-  opacity: 0.2;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
 }
 
-.f-globe-glow {
-  position: absolute;
-  inset: -20px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, transparent 60%);
-  filter: blur(20px);
+.fv-ring-manual circle {
+  stroke: #cbd5e1;
+  stroke-dasharray: 6 6;
+  opacity: 0.6;
 }
 
-.f-globe-grid {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(146, 152, 228, 0.12) 1px, transparent 1px);
-  background-size: 20px 20px;
-  mask-image: radial-gradient(circle, black 30%, transparent 70%);
-  -webkit-mask-image: radial-gradient(circle, black 30%, transparent 70%);
-  animation: rotateGlobe 120s linear infinite;
+.fv-ring-smart circle {
+  stroke: url(#smartGrad);
+  stroke-dasharray: 283;
+  stroke-dashoffset: 283;
+  animation: fvRingFill 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.6s;
 }
 
-@keyframes rotateGlobe {
-  to {
-    transform: rotate(360deg);
-  }
+.fv-comp-time {
+  font-size: 14px;
+  font-weight: 800;
+  color: #64748b;
+  z-index: 2;
+}
+
+.fv-text-gradient {
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.fv-comp-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fv-comp-vs {
+  font-size: 13px;
+  font-weight: 800;
+  color: #94a3b8;
+  background: #f1f5f9;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fvZoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards 0.2s;
+}
+
+.fv-compare-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  padding: 8px 24px;
+  border-radius: 999px;
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.15);
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+  z-index: 2;
+  animation: fvBadgeBounce 2s ease-in-out infinite, fvPopUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards 0.8s;
+}
+
+.fv-compare-badge-num {
+  font-size: 20px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes fvRingEnter {
+  from { opacity: 0; transform: scale(0.5); }
+}
+
+@keyframes fvRingFill {
+  from { stroke-dashoffset: 283; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fvZoomIn {
+  from { opacity: 0; transform: scale(0); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fvPopUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fvBadgeBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
 @keyframes fadeIn {
@@ -1210,6 +1536,7 @@
     transform: translateY(0);
   }
 }
+
 
 /* =============================================
    TESTIMONIALS
@@ -1473,9 +1800,23 @@
     padding: 32px 24px;
   }
 
-  .f-globe-container {
-    width: 240px;
-    height: 240px;
+  .foundation-visual {
+    min-height: 260px;
+  }
+
+  .fv-pipe-ring {
+    width: 42px;
+    height: 42px;
+  }
+
+  .fv-hex {
+    width: 48px;
+    height: 48px;
+  }
+
+  .fv-circuit-core {
+    width: 46px;
+    height: 46px;
   }
 
   .tf-crazy-glow {
