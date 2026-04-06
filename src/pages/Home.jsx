@@ -136,10 +136,12 @@ export default function Home({ setFilter }) {
 
             <div className="hero2-actions">
               <button className="btn hero2-btn-primary" onClick={() => navigate('/checker')}>
-                Check Eligibility →
+                <span>Check Eligibility</span>
+                <span className="btn-icon"></span>
               </button>
               <button className="btn hero2-btn-outline" onClick={() => navigate('/schemes')}>
-                Explore Schemes
+                <span>Explore Schemes</span>
+                <span className="btn-icon"></span>
               </button>
             </div>
 
