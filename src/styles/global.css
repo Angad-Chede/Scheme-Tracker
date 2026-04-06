@@ -11,42 +11,22 @@
 }
 
 /* =============================================
-   SATOSHI FONT FAMILY
+   AMULYA FONT FAMILY (Variable)
    ============================================= */
 
 @font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/Satoshi-Regular.woff2') format('woff2'),
-       url('/fonts/Satoshi-Regular.woff') format('woff');
-  font-weight: 400;
+  font-family: 'Amulya';
+  src: url('../assets/Amulya_Complete/Fonts/TTF/Amulya-Variable.ttf') format('truetype');
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/Satoshi-Medium.woff2') format('woff2'),
-       url('/fonts/Satoshi-Medium.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/Satoshi-Bold.woff2') format('woff2'),
-       url('/fonts/Satoshi-Bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/Satoshi-Black.woff2') format('woff2'),
-       url('/fonts/Satoshi-Black.woff') format('woff');
-  font-weight: 900;
-  font-style: normal;
+  font-family: 'Amulya';
+  src: url('../assets/Amulya_Complete/Fonts/TTF/Amulya-VariableItalic.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -87,9 +67,9 @@
   --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.1);
 
   /* Typography tokens */
-  --font-display:  'Satoshi', sans-serif;
-  --font-heading:  'Satoshi', sans-serif;
-  --font-body:     'Satoshi', sans-serif;
+  --font-display:  'Amulya', sans-serif;
+  --font-heading:  'Amulya', sans-serif;
+  --font-body:     'Amulya', sans-serif;
 }
 
 body {
@@ -386,6 +366,45 @@ hr {
 .empty-icon {
   font-size: 48px;
   margin-bottom: 12px;
+}
+
+/* Loading Screen */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-width: 320px;
+  min-height: 320px;
+}
+
+.loading-text-brand {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 900;
+  color: #ff8e3a; /* Orange from reference image */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: -30px;
+  user-select: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Page animation */
