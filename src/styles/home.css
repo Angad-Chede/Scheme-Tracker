@@ -59,6 +59,7 @@
     linear-gradient(180deg, #fafbff 0%, #ffffff 100%);
   padding: 88px 40px 72px;
   min-height: 620px;
+  padding-top: 40px;
 }
 
 .hero2-bg-glow {
@@ -173,7 +174,7 @@
 
 .hero2-subtitle {
   font-size: 17px;
-  color: rgba(69, 78, 112, 0.92);
+  color: rgba(0, 0, 0, 0.92);
   line-height: 1.8;
   margin-bottom: 36px;
   max-width: 520px;
