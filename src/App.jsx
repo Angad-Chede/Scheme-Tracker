@@ -97,7 +97,9 @@ export default function App() {
         bookmarks: restoredBookmarks,
       }));
 
-      setCheckerProfile(restoredProfile || { ...DEFAULT_PROFILE });
+      if (restoredProfile) {
+        setCheckerProfile(restoredProfile);
+      }
     } catch (err) {
       console.error('Profile hydration error:', err);
     }
@@ -256,8 +258,16 @@ export default function App() {
       income: parseInt(checkerProfile.income) || 0,
       familySize: parseInt(checkerProfile.familySize) || 0,
     };
-    setUser((prev) => ({ ...(prev || {}), profile }));
+    
     setCheckerProfile(profile);
+
+    if (!user) {
+      showToast('Please sign in to view your eligibility results', 'info');
+      navigate('/login', { state: { from: '/results' } });
+      return;
+    }
+
+    setUser((prev) => ({ ...(prev || {}), profile }));
 
     if (user?.id) {
       try {
