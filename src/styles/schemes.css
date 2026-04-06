@@ -262,9 +262,29 @@
   gap: 12px;
 }
 
+.scheme-badge {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge.b-blue{
+  background-color: #e6f0ff;
+  color: #003399;
+  border: 1px solid #e6f0ff;
+}
+
+.badge.b-gray{
+  background-color: #e6f0ff;
+  color: #003399;
+  border: 1px solid #e6f0ff;
+}
+
 .scheme-action-col {
   padding-left: 24px;
-  border-left: 1px solid var(--border);
+  border-left: 1px solid rgb(0,0,0);
   display: flex;
   align-items: center;
   gap: 16px;
