@@ -76,7 +76,7 @@ export default function Auth({ mode, onLogin, showToast }) {
 
         if (data.session) {
           showToast('Account created! Welcome to SchemeTracker', 'success');
-          navigate(from === '/results' ? '/results' : '/checker', { replace: true });
+          navigate(from === '/result' ? '/result' : '/checker', { replace: true });
         } else {
           showToast('Signup successful! Please verify your email before logging in.', 'success');
           navigate('/login');
