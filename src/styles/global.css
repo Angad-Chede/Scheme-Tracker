@@ -441,7 +441,18 @@ hr {
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  animation: fadeIn 0.3s ease-out;
+  transition: opacity 0.4s ease-in-out, visibility 0.4s;
+}
+
+.loading-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.loading-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .loading-content {
@@ -466,19 +477,15 @@ hr {
   user-select: none;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
 /* Page animation */
 .page {
   animation: fadein 0.2s ease;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.page.page-hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 @keyframes fadein {
