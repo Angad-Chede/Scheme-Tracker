@@ -151,6 +151,21 @@ export default function Navbar({ user, onSignOut }) {
                   <span className="nav-mobile-greeting">{user.name}</span>
                 </div>
               </div>
+
+              <button 
+                className={`nav-mobile-link${pathname === 'dashboard' ? ' active' : ''}`} 
+                onClick={() => handleNavigate('/dashboard')}
+              >
+                Dashboard
+              </button>
+              <button 
+                className={`nav-mobile-link${pathname === 'result' ? ' active' : ''}`} 
+                onClick={() => handleNavigate('/result')}
+              >
+                My Results
+              </button>
+
+              <div className="nav-mobile-divider" style={{ margin: '8px 0' }}></div>
               <button className="nav-mobile-btn sign-out-minimal" onClick={onSignOut}>Sign out</button>
             </div>
           ) : (
