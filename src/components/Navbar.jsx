@@ -95,7 +95,7 @@ export default function Navbar({ user, onSignOut }) {
                   </button>
                   <button 
                     className="nav-dropdown-item" 
-                    onClick={() => { handleNavigate('/results'); setIsProfileDropdownOpen(false); }}
+                    onClick={() => { handleNavigate('/result'); setIsProfileDropdownOpen(false); }}
                   >
                     My Results
                   </button>
