@@ -7,9 +7,9 @@ import Toast from './components/Toast';
 import Home from './pages/Home';
 import Auth from './pages/Auth';
 import Checker from './pages/Checker';
-import Results from './pages/Results';
+import Results from './pages/result/Result';
 import Schemes from './pages/Schemes';
-import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/dashboard/Dashboard';
 import Admin from './pages/Admin';
 import { supabase } from './lib/supabase';
 import {
@@ -68,7 +68,7 @@ export default function App() {
   const [schemeBtype, setSchemeBtype] = useState('');
   const [resultFilter, setResultFilter] = useState('all');
   const [authLoading, setAuthLoading] = useState(true);
-  const [isPageLoading, setIsPageLoading] = useState(false);
+  const [isPageLoading, setIsPageLoading] = useState(true);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -160,7 +160,7 @@ export default function App() {
     setIsPageLoading(true);
     const timer = setTimeout(() => {
       setIsPageLoading(false);
-    }, 2000); // 2 second minimum loading time
+    }, 1500); // 1.5 second cinematic loading
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
@@ -263,7 +263,7 @@ export default function App() {
 
     if (!user) {
       showToast('Please sign in to view your eligibility results', 'info');
-      navigate('/login', { state: { from: '/results' } });
+      navigate('/login', { state: { from: '/result' } });
       return;
     }
 
@@ -279,15 +279,15 @@ export default function App() {
 
     setCheckerStep(0);
     showToast('Profile saved! Showing your eligibility results.', 'success');
-    navigate('/results');
+    navigate('/result');
   }
 
   return (
     <>
       <ScrollToTop />
-      <LoadingScreen isVisible={isPageLoading} />
+      <LoadingScreen isVisible={isPageLoading || authLoading} />
       <Navbar user={user} onSignOut={handleSignOut} />
-      <div className="page" key={location.pathname}>
+      <div className={`page ${isPageLoading || authLoading ? 'page-hidden' : ''}`} key={location.pathname}>
         <Routes>
           <Route path="/" element={<Home setFilter={setSchemeCat} />} />
           <Route path="/login" element={<Auth mode="login" onLogin={handleLogin} showToast={showToast} />} />
@@ -326,7 +326,7 @@ export default function App() {
 
           {/* Protected Routes */}
           <Route 
-            path="/results" 
+            path="/result" 
             element={
               <ProtectedRoute user={user} authLoading={authLoading}>
                 <Results
