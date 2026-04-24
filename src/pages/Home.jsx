@@ -5,9 +5,9 @@ import '../styles/home.css';
 import CountUp from '../components/CountUp';
 import { CATS } from '../data';
 import { StripeGradientShader } from '../components/ui/stripe-like-gradient-shader';
-import { VideoScrollHero } from '../components/ui/video-scroll-hero';
-
-import demoVideo from '../assets/video1.mp4';
+import { AnimatedVideoOnScroll } from "@/components/ui/animated-video-on-scroll";
+ 
+import demoVideo from '../assets/video1.mp4';  
 import imgAgri from '../assets/1Agri.png';
 import imgHealth from '../assets/2health.png';
 import imgHouse from '../assets/3house.png';
@@ -465,11 +465,11 @@ export default function Home({ setFilter }) {
 
         {/* VIDEO SECTION */}
         <div className="video-section-wrapper" style={{ marginBottom: '80px', textAlign: 'center' }}>
-          <div className="section-label">HOW IT WORKS</div>
+          <div className="section-label">Watch </div>
           <h2 className="section-title" style={{ marginBottom: '40px' }}>
-            Watch <span className="text-blue">Our Demo</span>
+            <span className="text-blue">WHAT RBI SAY'S</span>
           </h2>
-          <VideoScrollHero videoSrc={demoVideo} startScale={0.5} />
+          <AnimatedVideoOnScroll videoSrc={demoVideo} />
         </div>
 
         {/* SCHEME EXPLORER */}
