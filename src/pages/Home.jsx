@@ -6,6 +6,7 @@ import CountUp from '../components/CountUp';
 import { CATS } from '../data';
 import { StripeGradientShader } from '../components/ui/stripe-like-gradient-shader';
 
+import demoVideo from '../assets/video1.mp4';
 import imgAgri from '../assets/1Agri.png';
 import imgHealth from '../assets/2health.png';
 import imgHouse from '../assets/3house.png';
@@ -467,8 +468,15 @@ export default function Home({ setFilter }) {
           <h2 className="section-title" style={{ marginBottom: '40px' }}>
             Watch <span className="text-blue">Our Demo</span>
           </h2>
-          <div style={{ maxWidth: '900px', margin: '0 auto', aspectRatio: '16/9', backgroundColor: '#0f172a', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 20px 40px rgba(0,0,0,0.2)' }}>
-            <span style={{ color: '#64748b', fontSize: '1.25rem' }}>Video Player Placeholder</span>
+          <div style={{ maxWidth: '900px', margin: '0 auto', aspectRatio: '16/9', backgroundColor: '#0f172a', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 20px 40px rgba(0,0,0,0.2)' }}>
+            <video 
+              src={demoVideo} 
+              controls 
+              autoPlay 
+              muted 
+              loop 
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+            />
           </div>
         </div>
 
