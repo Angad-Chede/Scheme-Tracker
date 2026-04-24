@@ -5,14 +5,7 @@ import '../styles/home.css';
 import CountUp from '../components/CountUp';
 import { CATS } from '../data';
 import { StripeGradientShader } from '../components/ui/stripe-like-gradient-shader';
-import {
-  ContainerScroll,
-  ContainerSticky,
-  ContainerAnimated,
-  ContainerInset,
-  HeroVideo,
-  HeroButton,
-} from '../components/ui/animated-video-on-scroll';
+import { VideoScrollHero } from '../components/ui/video-scroll-hero';
 
 import demoVideo from '../assets/video1.mp4';
 import imgAgri from '../assets/1Agri.png';
@@ -470,43 +463,14 @@ export default function Home({ setFilter }) {
           </div>
         </div>
 
-        {/* VIDEO SECTION — Animated on Scroll */}
+        {/* VIDEO SECTION */}
+        <div className="video-section-wrapper" style={{ marginBottom: '80px', textAlign: 'center' }}>
+          <div className="section-label">HOW IT WORKS</div>
+          <h2 className="section-title" style={{ marginBottom: '40px' }}>
+            Watch <span className="text-blue">Our Demo</span>
+          </h2>
+          <VideoScrollHero videoSrc={demoVideo} startScale={0.5} />
         </div>
-        <ContainerScroll className="h-[350vh]">
-          <ContainerSticky
-            
-            className="bg-slate-900 px-6 py-10 text-slate-50"
-          >
-            <ContainerAnimated className="space-y-4 text-center">
-              <h2 className="text-5xl font-medium tracking-tighter md:text-6xl">
-                See It In Action
-              </h2>
-              <p className="mx-auto max-w-[42ch] opacity-80">
-                Watch how SchemeTracker helps you discover and claim government
-                benefits in minutes, not days.
-              </p>
-            </ContainerAnimated>
-
-            <ContainerInset className="max-h-[450px] w-auto py-6">
-              <HeroVideo
-                src={demoVideo}
-              />
-            </ContainerInset>
-            <ContainerAnimated
-              transition={{ delay: 0.4 }}
-              outputRange={[-120, 0]}
-              inputRange={[0, 0.7]}
-              className="mx-auto mt-2 w-fit"
-            >
-              <HeroButton
-                onClick={() => navigate('/checker')}
-              >
-                Get Started
-              </HeroButton>
-            </ContainerAnimated>
-          </ContainerSticky>
-        </ContainerScroll>
-        <div className="home-container">
 
         {/* SCHEME EXPLORER */}
         <div className="section-label">SCHEME EXPLORER</div>
