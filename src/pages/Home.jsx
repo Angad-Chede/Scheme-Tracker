@@ -464,10 +464,6 @@ export default function Home({ setFilter }) {
 
         {/* VIDEO SECTION */}
         <div className="video-section-wrapper" style={{ marginBottom: '80px', textAlign: 'center' }}>
-          <div className="section-label">HOW IT WORKS</div>
-          <h2 className="section-title" style={{ marginBottom: '40px' }}>
-            Watch <span className="text-blue">Our Demo</span>
-          </h2>
           <div style={{ maxWidth: '900px', margin: '0 auto', aspectRatio: '16/9', backgroundColor: '#0f172a', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 20px 40px rgba(0,0,0,0.2)' }}>
             <video 
               src={demoVideo} 
