@@ -10,7 +10,7 @@ export function AnimatedVideoOnScroll({ videoSrc }) {
   });
 
   const scale = useTransform(scrollYProgress, [1, 0], [0.6, 1]);
-  const y = useTransform(scrollYProgress, [1, 0], ["0%", "0%"]);
+  const y = useTransform(scrollYProgress, [1, 0], ["30%", "0%"]);
   const borderRadius = useTransform(
     scrollYProgress,
     [1, 0],
