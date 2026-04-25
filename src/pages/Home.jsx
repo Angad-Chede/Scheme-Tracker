@@ -464,7 +464,7 @@ export default function Home({ setFilter }) {
         </div>
 
         {/* VIDEO SECTION */}
-        <div className="video-section-wrapper" style={{ marginBottom: '80px', textAlign: 'center' }}>
+        <div className="video-section-wrapper" style={{ marginBottom: '40px', width: '100%', height: '100%', overflow: 'hidden', textAlign: 'center' }}>
           <div className="section-label">Watch </div>
           <h2 className="section-title" style={{ marginBottom: '40px' }}>
             <span className="text-blue">WHAT RBI SAY'S</span>
