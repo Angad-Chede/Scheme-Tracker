@@ -20,7 +20,7 @@ export function AnimatedVideoOnScroll({ videoSrc }) {
   return (
     <section ref={containerRef} className="relative h-[300vh] w-full">
 
-      <div className="sticky top-0 h-screen w-screen overflow-hidden">
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
 
         <motion.div
           style={{ scale, y, borderRadius }}
